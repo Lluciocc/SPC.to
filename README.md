@@ -4,6 +4,7 @@
 <img alt="License MIT" src="https://img.shields.io/badge/license-MIT-green">
 <img src="https://github.com/Lluciocc/spc.to/blob/main/img/badge.svg" alt="Build Status (dev-channel)">
 </p>
+
 ## About SPC.to
 
 SPC.to est un projet open-source développé avec React et TypeScript. L'objectif est de fournir une interface moderne et intuitive pour consulter vos moyennes EcoleDirecte.
