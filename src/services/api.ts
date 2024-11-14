@@ -109,7 +109,7 @@ export async function login(
     const loginData = {
       identifiant: username.trim(),
       motdepasse: password,
-      uuid: crypto.randomUUID(),
+      uuid: "",
       isReLogin: false,
     };
 
@@ -223,7 +223,7 @@ export async function FinalLogin(
     const loginData = {
       identifiant: username.trim(),
       motdepasse: password,
-      uuid: crypto.randomUUID(),
+      uuid: "",
       isReLogin: false,
       fa: [
         {
