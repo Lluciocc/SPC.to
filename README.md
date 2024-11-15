@@ -7,8 +7,7 @@
 
 ## About SPC.to
 
-SPC.to est un projet open-source développé avec React et TypeScript. L'objectif est de fournir une interface moderne et intuitive pour consulter vos moyennes EcoleDirecte.
-
+SPC.to is an open-source project developed with React and TypeScript. The objective is to provide a modern and intuitive interface to consult your EcoleDirecte averages.
 
 > [!warning]
 > This project is not affiliated with EcoleDirecte or Aplim in any way.
@@ -21,7 +20,7 @@ SPC.to est un projet open-source développé avec React et TypeScript. L'objecti
 
 ## Contributing
 
-Ecole Directe Plus is built on React. We use VITE development environment to work. Here is how to setup:
+SPC.to is built on React. We use VITE development environment to work. Here is how to setup:
 
 ```bash
 # install dependencies
