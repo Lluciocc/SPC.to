@@ -66,9 +66,9 @@ async function makeApiRequest(
 ): Promise<Response> {
   const defaultHeaders = {
     'Content-Type': 'application/x-www-form-urlencoded',
-    'Accept': 'application/json, text/plain, */*',
-    //'X-Requested-With': 'XMLHttpRequest',
-    //'User-Agent': 'Mozilla/5.0',
+    Accept: 'application/json, text/plain, */*',
+    'X-Requested-With': 'XMLHttpRequest',
+    'User-Agent': 'Mozilla/5.0',
   };
 
   try {
@@ -77,7 +77,10 @@ async function makeApiRequest(
       headers: {
         ...defaultHeaders,
         ...options.headers,
-      }
+      },
+      mode: 'cors',
+      credentials: 'omit',
+      referrerPolicy: 'no-referrer',
     });
     return response;
   } catch (error) {
@@ -93,7 +96,6 @@ async function makeApiRequest(
     throw error;
   }
 }
-
 
 export async function login(
   username: string,
@@ -119,7 +121,7 @@ export async function login(
     const data = await handleApiResponse<LoginResponse>(response);
 
     if (!data.token) {
-      throw new EcoleDirecteError('Identifiant ou mot de passe incorrect (pas de token)');
+      throw new EcoleDirecteError('Identifiant ou mot de passe incorrect');
     }
 
     return data.token;
