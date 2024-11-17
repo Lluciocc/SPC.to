@@ -66,7 +66,7 @@ async function makeApiRequest(
 ): Promise<Response> {
   const defaultHeaders = {
     'Content-Type': 'application/x-www-form-urlencoded',
-    Accept: 'application/json, text/plain, */*',
+    'Accept': 'application/json, text/plain, */*',
     'X-Requested-With': 'XMLHttpRequest',
     'User-Agent': 'Mozilla/5.0',
   };
@@ -77,10 +77,7 @@ async function makeApiRequest(
       headers: {
         ...defaultHeaders,
         ...options.headers,
-      },
-      mode: 'cors',
-      credentials: 'omit',
-      referrerPolicy: 'no-referrer',
+      }
     });
     return response;
   } catch (error) {
