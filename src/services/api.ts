@@ -128,7 +128,7 @@ export async function login(
     const data = await handleApiResponse<LoginResponse>(response);
 
     if (!data.token) {
-      throw new EcoleDirecteError('Identifiant ou mot de passe incorrect');
+      throw new EcoleDirecteError('Identifiant ou mot de passe incorrect (pas de token)');
     }
 
     return data.token;
