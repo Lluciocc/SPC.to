@@ -66,7 +66,7 @@ async function makeApiRequest(
 ): Promise<Response> {
   const defaultHeaders = {
     'Content-Type': 'application/x-www-form-urlencoded',
-    'Accept': 'application/json, text/plain, */*',
+    'Accept': 'text/plain, */*',
   };
 
   try {
