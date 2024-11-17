@@ -32,7 +32,7 @@ export function Parameters({ onClose }: Parameters) {
         </div>
 
         <div className="p-6 overflow-y-auto max-h-[60vh] space-y-6">
-          //
+          // Not for now.
         </div>
       </div>
     </div>
