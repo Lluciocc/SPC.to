@@ -109,7 +109,7 @@ export async function login(
     const loginData = {
       identifiant: username.trim(),
       motdepasse: password,
-      uuid: "",
+      uuid: crypto.randomUUID(),
       isReLogin: false,
     };
 
@@ -223,7 +223,7 @@ export async function FinalLogin(
     const loginData = {
       identifiant: username.trim(),
       motdepasse: password,
-      uuid: "",
+      uuid: crypto.randomUUID(),
       isReLogin: false,
       fa: [
         {
@@ -245,7 +245,7 @@ export async function FinalLogin(
 
     const account = data.data.accounts[0];
     return {
-      token: data.token,
+      token,
       account: {
         id: account.id,
         nom: account.nom,
