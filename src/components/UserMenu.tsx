@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { LogOut, User, FileText, Scale, Code, ChevronDown } from 'lucide-react';
+import { LogOut, User, FileText, Scale, Code, ChevronDown, Settings } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 import { LegalNotice } from './LegalNotice';
 import { DevNotes } from './DevNotes';
+import { Parameters } from './Settings';
 import type { User as UserType } from '../types/auth';
 
 interface UserMenuProps {
@@ -15,6 +16,7 @@ export function UserMenu({ user, onLogout, onShowPatchNotes }: UserMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [showLegal, setShowLegal] = useState(false);
   const [showDevNotes, setShowDevNotes] = useState(false);
+  const [showParameters, setShowParameters] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -90,6 +92,14 @@ export function UserMenu({ user, onLogout, onShowPatchNotes }: UserMenuProps) {
             <Scale className="h-4 w-4" />
             <span>Mentions légales</span>
           </button>
+          
+          <button
+            onClick={() => setShowParameters(true)}
+            className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2 transition-colors"
+          >
+            <Settings className="h-4 w-4" />
+            <span>Paramètres</span>
+          </button>
 
           <div className="px-4 py-2 flex items-center space-x-2 border-t border-gray-200 dark:border-gray-700">
             <ThemeToggle />
@@ -108,6 +118,7 @@ export function UserMenu({ user, onLogout, onShowPatchNotes }: UserMenuProps) {
 
       {showLegal && <LegalNotice onClose={() => setShowLegal(false)} />}
       {showDevNotes && <DevNotes onClose={() => setShowDevNotes(false)} />}
+      {showParameters && <Parameters onClose={() => setShowParameters(false)} />}
     </>
   );
 }
