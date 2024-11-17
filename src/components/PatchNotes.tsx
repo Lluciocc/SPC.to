@@ -61,6 +61,12 @@ export function PatchNotes({ onClose }: PatchNotesProps) {
                                       ⚖️ Ajout d'un onglet 'Mentions légales'
                                   </span>
                               </li>
+                              <li className="flex items-start space-x-3">
+                                  <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-indigo-500 dark:bg-indigo-400 mt-2"></span>
+                                  <span className="text-gray-700 dark:text-gray-300">
+                                      🔁 Ajout d'un systeme de connection automatique pour rendre l'experience plus fluide.
+                                  </span>
+                              </li>
                           </ul>
                       </div>
                   </div>
