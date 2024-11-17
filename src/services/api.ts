@@ -66,13 +66,12 @@ async function makeApiRequest(
 ): Promise<Response> {
   const defaultHeaders = {
     'Content-Type': 'application/x-www-form-urlencoded',
-    'Accept': 'text/plain, */*',
+    'Accept': 'application/json, text/plain, */*',
   };
 
   try {
     const response = await fetch(url, {
       ...options,
-      mode: 'cors', // Important pour les requêtes cross-origin
       headers: {
         ...defaultHeaders,
         ...options.headers,
