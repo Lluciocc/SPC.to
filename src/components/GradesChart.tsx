@@ -1,5 +1,10 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
+import { Line } from 'react-chartjs-2';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, LineElement, PointElement } from 'chart.js'; // Importer PointElement
 import type { Grade } from '../types/auth';
+
+// Enregistrement des composants de Chart.js, y compris PointElement
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, LineElement, PointElement);
 
 interface GradesChartProps {
   grades: Grade[];
@@ -11,100 +16,120 @@ interface ChartData {
 }
 
 export function GradesChart({ grades }: GradesChartProps) {
+  const chartRef = useRef<ChartJS | null>(null); // Référence au graphique Chart.js
+
   const chartData = useMemo(() => {
+    if (!grades || grades.length === 0) {
+      console.warn('No grades data available');
+      return [];
+    }
+
     const monthlyGrades: { [key: string]: number[] } = {};
-    
-    grades.forEach(subject => {
-      subject.notes.forEach(note => {
-        const date = new Date(note.date);
-        const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
-        
-        if (!monthlyGrades[monthKey]) {
-          monthlyGrades[monthKey] = [];
-        }
-        
-        monthlyGrades[monthKey].push(note.valeur);
-      });
+
+    grades.forEach((grade) => {
+      if (!grade.valeur) {
+        console.warn('Grade without value:', grade);
+        return; // Si la note ne contient pas de valeur, on l'ignore
+      }
+
+      const date = new Date(grade.date); // Date de la note
+      if (isNaN(date.getTime())) {
+        console.warn('Invalid date:', grade.date);
+        return; // Si la date est invalide, on l'ignore
+      }
+
+      const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+
+      if (!monthlyGrades[monthKey]) {
+        monthlyGrades[monthKey] = [];
+      }
+
+      // Ajout de la note à la liste des notes pour le mois
+      const noteValue = parseFloat(grade.valeur);
+      monthlyGrades[monthKey].push(noteValue);
+
     });
+
 
     return Object.entries(monthlyGrades)
       .map(([month, notes]) => ({
         month,
-        average: notes.reduce((a, b) => a + b, 0) / notes.length
+        average: notes.reduce((a, b) => a + b, 0) / notes.length,
       }))
       .sort((a, b) => a.month.localeCompare(b.month));
   }, [grades]);
 
-  const maxAverage = Math.max(...chartData.map(d => d.average));
-  const minAverage = Math.min(...chartData.map(d => d.average));
+  console.log('Chart Data:', chartData); // Log pour vérifier chartData final
 
-  const formatMonth = (monthKey: string) => {
-    const [year, month] = monthKey.split('-');
-    const date = new Date(parseInt(year), parseInt(month) - 1);
-    return date.toLocaleDateString('fr-FR', { month: 'short', year: 'numeric' });
+  if (!chartData.length) {
+    return <div>No data available</div>;
+  }
+
+  const labels = chartData.map((data) => data.month);
+  const averages = chartData.map((data) => data.average);
+
+  // Données pour le graphique avec Chart.js
+  const data = {
+    labels: labels, // Mois
+    datasets: [
+      {
+        label: 'Moyenne des notes', // Pour la courbe
+        data: averages,
+        fill: false,
+        borderColor: 'rgb(75, 192, 192)', // Couleur de la courbe
+        tension: 0.1, // Courbe lisse
+        borderWidth: 2,
+        pointRadius: 5, // Taille des points sur la courbe
+      },
+      {
+        label: 'Moyenne mensuelle', // Pour les barres
+        data: averages,
+        backgroundColor: 'rgba(75, 192, 192, 0.2)', // Couleur des barres
+        borderColor: 'rgb(75, 192, 192)',
+        borderWidth: 1,
+        categoryPercentage: 0.5,
+        barPercentage: 0.5,
+      },
+    ],
   };
 
+  // Options pour personnaliser le graphique
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      tooltip: {
+        callbacks: {
+          label: function (context: any) {
+            return `${context.dataset.label}: ${context.raw.toFixed(2)}`;
+          },
+        },
+      },
+    },
+    scales: {
+      y: {
+        min: Math.min(...averages) - 1, // Plage de l'axe Y
+        max: Math.max(...averages) + 1,
+        beginAtZero: false, // L'axe Y commence à la valeur la plus basse
+      },
+    },
+  };
+
+  useEffect(() => {
+    if (chartRef.current) {
+      // Détruire le graphique précédent si nécessaire
+      chartRef.current.destroy();
+    }
+  }, [chartData]);
+
   return (
-    <div className="w-full h-[400px] relative">
-      <div className="absolute left-0 top-0 bottom-0 w-12 flex flex-col justify-between text-xs text-gray-500 dark:text-gray-400">
-        {[...Array(6)].map((_, i) => {
-          const value = maxAverage - (i * (maxAverage - minAverage) / 5);
-          return (
-            <div key={i} className="text-right pr-2">
-              {value.toFixed(1)}
-            </div>
-          );
-        })}
-      </div>
-      
-      <div className="ml-12 h-full flex items-end">
-        <div className="flex-1 h-full flex items-end">
-          {chartData.map((data, index) => {
-            const height = ((data.average - minAverage) / (maxAverage - minAverage)) * 100;
-            const prevHeight = index > 0 
-              ? ((chartData[index - 1].average - minAverage) / (maxAverage - minAverage)) * 100 
-              : height;
-
-            return (
-              <div
-                key={data.month}
-                className="flex-1 flex flex-col items-center group relative"
-              >
-                {index > 0 && (
-                  <div
-                    className="absolute bottom-0 w-full h-full"
-                    style={{
-                      clipPath: `polygon(
-                        0% ${100 - prevHeight}%,
-                        100% ${100 - height}%,
-                        100% 100%,
-                        0% 100%
-                      )`
-                    }}
-                  >
-                    <div className="w-full h-full bg-indigo-100 dark:bg-indigo-900/20"></div>
-                  </div>
-                )}
-                
-                <div className="relative w-full">
-                  <div
-                    className="absolute bottom-0 w-2 rounded-t-full left-1/2 -translate-x-1/2 bg-indigo-600 dark:bg-indigo-500 transition-all group-hover:bg-indigo-700 dark:group-hover:bg-indigo-400"
-                    style={{ height: `${height}%` }}
-                  ></div>
-                </div>
-
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 transform -rotate-45 text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap origin-left translate-y-6">
-                  {formatMonth(data.month)}
-                </div>
-
-                <div className="opacity-0 group-hover:opacity-100 absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-gray-900 dark:bg-gray-700 text-white px-2 py-1 rounded text-xs whitespace-nowrap transition-opacity">
-                  Moyenne: {data.average.toFixed(2)}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
+    <div>
+    <h1 className="text-xl font-semibold dark:text-white">Graphique des Notes</h1>
+    <div style={{ width: '100%', height: '400px' }}>
+      <Line data={data} options={options} />
     </div>
+  </div>
   );
 }

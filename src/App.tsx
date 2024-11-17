@@ -82,7 +82,6 @@ function App() {
 
           setCoefficients(coefficients);
           setDisciplines(disciplines); 
-          console.log('Coefficients par matière :', coefficients);
 
           setGrades(gradesData.notes);
         } else {
@@ -163,7 +162,6 @@ function App() {
 
         setCoefficients(coefficients); 
         setDisciplines(disciplines); 
-        console.log('Coefficients par matière :', coefficients);
 
         setGrades(gradesData.notes);
       } else {
