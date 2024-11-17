@@ -120,6 +120,9 @@ export async function login(
     const response = await makeApiRequest(`${API_URL}/login.awp`, {
       method: 'POST',
       body: `data=${JSON.stringify(loginData)}`,
+      headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+      }
     });
 
     const data = await handleApiResponse<LoginResponse>(response);
