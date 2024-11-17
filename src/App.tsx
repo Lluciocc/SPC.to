@@ -12,13 +12,12 @@ import {
   getQCM,
   FinalLogin,
 } from './services/api';
-import type { User, Grade } from './types/auth';
+import type { User, Grade, Discipline } from './types/auth';
 import { Question } from './components/QcmForm';
 
 interface AuthUser extends User {
   token: string;
 }
-
 
 function App() {
   const [user, setUser] = useState<AuthUser | null>(null);
@@ -32,72 +31,91 @@ function App() {
   const [passStr, setPassStr] = useState<string>('');
   const [showPatchNotes, setShowPatchNotes] = useState(false);
 
-  window.onload = async function TryToLog(){
+  const [disciplines, setDisciplines] = useState<Discipline[]>([]);
+  const [coefficients, setCoefficients] = useState<{ [key: string]: number }>({});
+
+  window.onload = async function TryToLog() {
     try {
-      if (localStorage.getItem("token") !== null
-            && localStorage.getItem("username") !== null
-            && localStorage.getItem("password") !== null
-            && localStorage.getItem("cn") !== null
-            && localStorage.getItem("cv") !== null) {
-              
-          console.warn("not logged for the first time");
+      if (
+        localStorage.getItem('token') !== null &&
+        localStorage.getItem('username') !== null &&
+        localStorage.getItem('password') !== null &&
+        localStorage.getItem('cn') !== null &&
+        localStorage.getItem('cv') !== null
+      ) {
+        console.warn('not logged for the first time');
 
-          const token_local = localStorage.getItem("token");
-          const username_local = localStorage.getItem("username");
-          const password_local = localStorage.getItem("password");
-          const cn_local = localStorage.getItem("cn");
-          const cv_local = localStorage.getItem("cv");
-          const {token, account } = await FinalLogin(
-            token_local,
-            username_local,
-            password_local,
-            cn_local,
-            cv_local
-          );
+        const token_local = localStorage.getItem('token');
+        const username_local = localStorage.getItem('username');
+        const password_local = localStorage.getItem('password');
+        const cn_local = localStorage.getItem('cn');
+        const cv_local = localStorage.getItem('cv');
+        const { token, account } = await FinalLogin(
+          token_local,
+          username_local,
+          password_local,
+          cn_local,
+          cv_local
+        );
 
-          const authUser: AuthUser = {
-            ...account,
-            token,
-          };
-    
-          setUser(authUser);
-          setShowQcm(false);
+        const authUser: AuthUser = {
+          ...account,
+          token,
+        };
 
-          const gradesData = await getGrades(token, account.id);
+        setUser(authUser);
+        setShowQcm(false);
+
+        const gradesData = await getGrades(token, account.id);
+        const periodeActuelle = gradesData.periodes.find(
+          (periode) => periode.codePeriode === 'A001' 
+        );
+
+        if (periodeActuelle && periodeActuelle.ensembleMatieres?.disciplines) {
+          const disciplines = periodeActuelle.ensembleMatieres.disciplines;
+
+
+          const coefficients = disciplines.reduce((acc, discipline) => {
+            acc[discipline.discipline] = discipline.coef;
+            return acc;
+          }, {});
+
+          setCoefficients(coefficients);
+          setDisciplines(disciplines); 
+          console.log('Coefficients par matière :', coefficients);
+
           setGrades(gradesData.notes);
+        } else {
+          console.warn('Période ou disciplines introuvables dans les données.');
         }
-      } catch (err){
-        const errorMessage =
-        err instanceof Error
-          ? err.message
-          : 'Connexion échouée. Veuillez réessayer.';
-        setError(errorMessage);
       }
-  }
+    } catch (err) {
+      const errorMessage =
+        err instanceof Error ? err.message : 'Connexion échouée. Veuillez réessayer.';
+      setError(errorMessage);
+    }
+  };
 
   const handleLogin = async (username: string, password: string) => {
     setLoading(true);
     setError(null);
     setUsernameStr(username);
     setPassStr(password);
-    localStorage.setItem("username", username);
-    localStorage.setItem("password", password);
+    localStorage.setItem('username', username);
+    localStorage.setItem('password', password);
 
     try {
-        console.warn("logged for the first time")
+      console.warn('logged for the first time');
 
-        const token = await login(username, password);
-        setTempToken(token);
-  
-        const questions = await getQCM(token);
-        setQcmQuestions([questions]);
-        setShowQcm(true);
+      const token = await login(username, password);
+      setTempToken(token);
 
+      const questions = await getQCM(token);
+      setQcmQuestions([questions]);
+      setShowQcm(true);
     } catch (err) {
       const errorMessage =
-        err instanceof Error
-          ? err.message
-          : 'Une erreur inattendue est survenue';
+        err instanceof Error ? err.message : 'Une erreur inattendue est survenue';
       setError(errorMessage);
     } finally {
       setLoading(false);
@@ -117,9 +135,9 @@ function App() {
         cn,
         cv
       );
-      localStorage.setItem("cn", cn);
-      localStorage.setItem("cv", cv);
-      localStorage.setItem("token", token);
+      localStorage.setItem('cn', cn);
+      localStorage.setItem('cv', cv);
+      localStorage.setItem('token', token);
 
       const authUser: AuthUser = {
         ...account,
@@ -130,12 +148,30 @@ function App() {
       setShowQcm(false);
 
       const gradesData = await getGrades(token, account.id);
-      setGrades(gradesData.notes);
+      const periodeActuelle = gradesData.periodes.find(
+        (periode) => periode.codePeriode === 'A001' 
+      );
+
+      if (periodeActuelle && periodeActuelle.ensembleMatieres?.disciplines) {
+        const disciplines = periodeActuelle.ensembleMatieres.disciplines;
+
+       
+        const coefficients = disciplines.reduce((acc, discipline) => {
+          acc[discipline.discipline] = discipline.coef;
+          return acc;
+        }, {});
+
+        setCoefficients(coefficients); 
+        setDisciplines(disciplines); 
+        console.log('Coefficients par matière :', coefficients);
+
+        setGrades(gradesData.notes);
+      } else {
+        console.warn('Période ou disciplines introuvables dans les données.');
+      }
     } catch (err) {
       const errorMessage =
-        err instanceof Error
-          ? err.message
-          : 'Une erreur inattendue est survenue';
+        err instanceof Error ? err.message : 'Une erreur inattendue est survenue';
       setError(errorMessage);
     } finally {
       setLoading(false);
@@ -172,14 +208,14 @@ function App() {
                     Consultez vos moyennes en temps réel
                   </p>
                 </div>
-                <UserMenu 
-                  user={user} 
+                <UserMenu
+                  user={user}
                   onLogout={handleLogout}
                   onShowPatchNotes={() => setShowPatchNotes(true)}
                 />
               </div>
 
-              <GradesTable grades={grades} />
+              <GradesTable grades={grades} coeficients={coefficients} />
             </div>
           ) : showQcm ? (
             <div className="fixed inset-0 bg-black/50 dark:bg-black/70 flex items-center justify-center p-4">

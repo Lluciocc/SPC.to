@@ -37,6 +37,22 @@ export interface QcmResponse {
   message?: string;
 }
 
+export interface Discipline {
+  id: number;
+  codeMatiere: string;
+  codeSousMatiere: string;
+  discipline: string;
+  coef: number;
+  effectif: number;
+  rang: number;
+  groupeMatiere: boolean;
+  idGroupeMatiere: number;
+  option: number;
+  sousMatiere: boolean;
+  saisieAppreciationSSMat: boolean;
+}
+
+
 export interface Grade {
   id: number;
   devoir: string;

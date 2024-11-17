@@ -5,26 +5,18 @@ import { GradesChart } from './GradesChart';
 
 interface GradesTableProps {
   grades: Grade[];
+  coeficients: { [matiere: string]: number }; // clé : nom de la matière, valeur : coefficient
 }
 
-interface SubjectGrades {
-  matiere: string;
-  notes: Grade[];
-}
+const parseGrade = (value: string): number => parseFloat(value.replace(',', '.'));
 
-const parseGrade = (value: string): number => {
-  // Handle comma-separated decimals
-  return parseFloat(value.replace(',', '.'));
-};
-
-export function GradesTable({ grades }: GradesTableProps) {
+export function GradesTable({ grades, coeficients }: GradesTableProps) {
   const [selectedTrimester, setSelectedTrimester] = useState<number>(1);
   const [showChart, setShowChart] = useState<boolean>(false);
 
   const subjectGrades = useMemo(() => {
     const gradesBySubject: { [key: string]: Grade[] } = {};
-    
-    grades.forEach(grade => {
+    grades.forEach((grade) => {
       if (!gradesBySubject[grade.libelleMatiere]) {
         gradesBySubject[grade.libelleMatiere] = [];
       }
@@ -38,33 +30,34 @@ export function GradesTable({ grades }: GradesTableProps) {
   }, [grades]);
 
   const calculateAverage = (notes: Grade[], trimester: number) => {
-    const trimesterNotes = notes.filter(note => {
+    const trimesterNotes = notes.filter((note) => {
       if (note.nonSignificatif) return false;
-      
       const noteDate = new Date(note.date);
       const month = noteDate.getMonth() + 1;
-      
-      switch(trimester) {
-        case 1: return month >= 9 && month <= 11;  // Sept-Nov
-        case 2: return month >= 12 || month <= 2;  // Dec-Feb
-        case 3: return month >= 3 && month <= 6;   // Mar-Jun
-        default: return true;
+      switch (trimester) {
+        case 1:
+          return month >= 9 && month <= 11; // Sept-Nov
+        case 2:
+          return month >= 12 || month <= 2; // Dec-Feb
+        case 3:
+          return month >= 3 && month <= 6; // Mar-Jun
+        default:
+          return true;
       }
     });
 
     if (trimesterNotes.length === 0) return 'N/A';
-    
+
     let totalWeightedGrade = 0;
     let totalWeight = 0;
 
-    trimesterNotes.forEach(note => {
+    trimesterNotes.forEach((note) => {
       const value = parseGrade(note.valeur);
       const maxGrade = parseGrade(note.noteSur);
       const coef = parseFloat(note.coef);
-      
-      // Convert grade to scale of 20 if needed
+
       const normalizedGrade = (value / maxGrade) * 20;
-      
+
       totalWeightedGrade += normalizedGrade * coef;
       totalWeight += coef;
     });
@@ -72,10 +65,30 @@ export function GradesTable({ grades }: GradesTableProps) {
     return totalWeight === 0 ? 'N/A' : (totalWeightedGrade / totalWeight).toFixed(2);
   };
 
+  const calculateGeneralAverage = () => {
+    let totalWeightedGrade = 0;
+    let totalWeight = 0;
+
+    subjectGrades.forEach((subject) => {
+      const coef = coeficients[subject.matiere]; 
+      if (!coef) return; 
+
+      const average = calculateAverage(subject.notes, selectedTrimester);
+      if (average === 'N/A') return;
+
+      const numericAverage = parseFloat(average);
+      totalWeightedGrade += numericAverage * coef;
+      totalWeight += coef;
+    });
+
+    return totalWeight === 0 ? 'N/A' : (totalWeightedGrade / totalWeight).toFixed(2);
+  };
+
+  const generalAverage = useMemo(calculateGeneralAverage, [subjectGrades, coeficients, selectedTrimester]);
+
   const getGradeColor = (average: string | number) => {
     if (average === 'N/A') return 'text-gray-500 dark:text-gray-400';
     const numericAverage = typeof average === 'string' ? parseFloat(average) : average;
-    
     if (numericAverage >= 16) return 'text-green-600 dark:text-green-400';
     if (numericAverage >= 14) return 'text-emerald-600 dark:text-emerald-400';
     if (numericAverage >= 12) return 'text-blue-600 dark:text-blue-400';
@@ -110,7 +123,6 @@ export function GradesTable({ grades }: GradesTableProps) {
             </button>
           </div>
         </div>
-        
         {!showChart ? (
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
@@ -131,14 +143,14 @@ export function GradesTable({ grades }: GradesTableProps) {
                 {subjectGrades.map((subject, index) => {
                   const average = calculateAverage(subject.notes, selectedTrimester);
                   const gradeColor = getGradeColor(average);
-                  
+
                   return (
                     <tr key={index} className="hover:bg-gray-50 dark:hover:bg-gray-700">
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
                         {subject.matiere}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                        {subject.notes.filter(n => !n.nonSignificatif).length}
+                        {subject.notes.filter((n) => !n.nonSignificatif).length}
                       </td>
                       <td className={`px-6 py-4 whitespace-nowrap text-sm font-semibold ${gradeColor}`}>
                         {average}
@@ -148,6 +160,12 @@ export function GradesTable({ grades }: GradesTableProps) {
                 })}
               </tbody>
             </table>
+            <div className="px-6 py-4 text-right">
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Moyenne Générale : </span>
+              <span className={`text-lg font-bold ${getGradeColor(generalAverage)}`}>
+                {generalAverage}
+              </span>
+            </div>
           </div>
         ) : (
           <div className="p-6">
