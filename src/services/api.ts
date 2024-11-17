@@ -67,18 +67,24 @@ async function makeApiRequest(
   const defaultHeaders = {
     'Content-Type': 'application/x-www-form-urlencoded',
     'Accept': 'application/json, text/plain, */*',
-    'X-Requested-With': 'XMLHttpRequest',
-    'User-Agent': 'Mozilla/5.0',
   };
 
   try {
     const response = await fetch(url, {
       ...options,
+      mode: 'cors', // Important pour les requêtes cross-origin
       headers: {
         ...defaultHeaders,
         ...options.headers,
-      }
+      },
     });
+
+    if (!response.ok) {
+      const errorMessage = `Erreur ${response.status} : ${response.statusText}`;
+      console.error('API Response Error:', errorMessage);
+      throw new Error(errorMessage);
+    }
+
     return response;
   } catch (error) {
     console.error('API Request Error:', error);
@@ -86,13 +92,14 @@ async function makeApiRequest(
       error instanceof TypeError &&
       error.message.includes('Failed to fetch')
     ) {
-      throw new EcoleDirecteError(
+      throw new Error(
         'La connexion au serveur a échoué. Veuillez vérifier votre connexion internet et réessayer.'
       );
     }
     throw error;
   }
 }
+
 
 export async function login(
   username: string,
