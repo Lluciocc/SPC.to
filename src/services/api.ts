@@ -66,9 +66,9 @@ async function makeApiRequest(
 ): Promise<Response> {
   const defaultHeaders = {
     'Content-Type': 'application/x-www-form-urlencoded',
-    Accept: 'application/json, text/plain, */*',
-    'X-Requested-With': 'XMLHttpRequest',
-    'User-Agent': 'Mozilla/5.0',
+    'Accept': 'application/json, text/plain, */*',
+    //'X-Requested-With': 'XMLHttpRequest',
+    //'User-Agent': 'Mozilla/5.0',
   };
 
   try {
@@ -109,7 +109,7 @@ export async function login(
     const loginData = {
       identifiant: username.trim(),
       motdepasse: password,
-      uuid: crypto.randomUUID(),
+      uuid: "",
       isReLogin: false,
     };
 
@@ -223,7 +223,7 @@ export async function FinalLogin(
     const loginData = {
       identifiant: username.trim(),
       motdepasse: password,
-      uuid: crypto.randomUUID(),
+      uuid: "",
       isReLogin: false,
       fa: [
         {
@@ -245,7 +245,7 @@ export async function FinalLogin(
 
     const account = data.data.accounts[0];
     return {
-      token,
+      token: data.token,
       account: {
         id: account.id,
         nom: account.nom,
