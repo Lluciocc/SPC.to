@@ -14,6 +14,7 @@ import {
 } from './services/api';
 import type { User, Grade, Discipline } from './types/auth';
 import { Question } from './components/QcmForm';
+import { InfoMessage } from './components/infoPopup';
 
 interface AuthUser extends User {
   token: string;
@@ -30,6 +31,8 @@ function App() {
   const [usernameStr, setUsernameStr] = useState<string>('');
   const [passStr, setPassStr] = useState<string>('');
   const [showPatchNotes, setShowPatchNotes] = useState(false);
+
+  const [info, setInfo] = useState<string | null>(null);
 
   const [disciplines, setDisciplines] = useState<Discipline[]>([]);
   const [coefficients, setCoefficients] = useState<{ [key: string]: number }>({});
@@ -194,6 +197,8 @@ function App() {
               {error}
             </div>
           )}
+          <InfoMessage info={"Le site est en cours de développement. Merci de votre indulgence !"} />
+
 
           {user ? (
             <div className="space-y-6">
