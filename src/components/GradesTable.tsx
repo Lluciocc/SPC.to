@@ -32,7 +32,7 @@ export function GradesTable({ grades, coeficients }: GradesTableProps) {
 
   const calculateAverage = (notes: Grade[], trimester: number) => {
     const trimesterNotes = notes.filter((note) => {
-      if (note.nonSignificatif note.nonSignificatif || note.valeur.trim().toLowerCase() === 'abs') return false;
+      if (note.nonSignificatif || note.valeur.trim().toLowerCase() === 'abs') return false;
       const noteDate = new Date(note.date);
       const month = noteDate.getMonth() + 1;
       switch (trimester) {
