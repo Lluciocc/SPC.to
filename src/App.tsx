@@ -34,8 +34,6 @@ function App() {
   const [showPatchNotes, setShowPatchNotes] = useState(false);
 
   const [warning, setWarning] = useState<string>('');
-
-  const [disciplines, setDisciplines] = useState<Discipline[]>([]);
   const [coefficients, setCoefficients] = useState<{ [key: string]: number }>({});
 
   window.onload = async function TryToLog() {
@@ -86,7 +84,6 @@ function App() {
           }, {});
 
           setCoefficients(coefficients);
-          setDisciplines(disciplines); 
 
           setGrades(gradesData.notes);
         } else {
@@ -166,7 +163,6 @@ function App() {
         }, {});
 
         setCoefficients(coefficients); 
-        setDisciplines(disciplines); 
 
         setGrades(gradesData.notes);
       } else {

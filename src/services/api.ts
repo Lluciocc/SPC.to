@@ -251,6 +251,7 @@ export async function FinalLogin(
         nom: account.nom,
         prenom: account.prenom,
         classe: account.profile.classe.code,
+        email: account.email,
       },
     };
   } catch (error) {

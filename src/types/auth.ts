@@ -8,6 +8,7 @@ export interface User {
   nom: string;
   prenom: string;
   classe: string;
+  email: string;
 }
 
 export interface LoginResponse {
