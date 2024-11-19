@@ -15,6 +15,7 @@ import {
 import type { User, Grade, Discipline } from './types/auth';
 import { Question } from './components/QcmForm';
 import { InfoMessage } from './components/infoPopup';
+import { WarningMessage } from './components/warningPopup';
 
 interface AuthUser extends User {
   token: string;
@@ -32,7 +33,7 @@ function App() {
   const [passStr, setPassStr] = useState<string>('');
   const [showPatchNotes, setShowPatchNotes] = useState(false);
 
-  const [info, setInfo] = useState<string | null>(null);
+  const [warning, setWarning] = useState<string>('');
 
   const [disciplines, setDisciplines] = useState<Discipline[]>([]);
   const [coefficients, setCoefficients] = useState<{ [key: string]: number }>({});
@@ -46,6 +47,7 @@ function App() {
         localStorage.getItem('cn') !== null &&
         localStorage.getItem('cv') !== null
       ) {
+        setWarning("Trying to log you...")
         console.warn('not logged for the first time');
 
         const token_local = localStorage.getItem('token');
@@ -198,7 +200,7 @@ function App() {
             </div>
           )}
           <InfoMessage info={"Le site est en cours de développement. Merci de votre indulgence !"} />
-
+          <WarningMessage warning={warning}></WarningMessage>
 
           {user ? (
             <div className="space-y-6">
