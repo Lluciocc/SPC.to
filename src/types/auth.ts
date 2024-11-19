@@ -96,6 +96,7 @@ export interface FLog {
   message?: string;
   data: {
     accounts: Array<{
+      email:  string;
       typeCompte: string;
       id: number;
       nom: string;

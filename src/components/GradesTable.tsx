@@ -17,10 +17,11 @@ export function GradesTable({ grades, coeficients }: GradesTableProps) {
   const subjectGrades = useMemo(() => {
     const gradesBySubject: { [key: string]: Grade[] } = {};
     grades.forEach((grade) => {
-      if (!gradesBySubject[grade.libelleMatiere]) {
-        gradesBySubject[grade.libelleMatiere] = [];
+      const subjectKey = grade.libelleMatiere + (grade.codeSousMatiere ? ` (${grade.codeSousMatiere})` : '');
+      if (!gradesBySubject[subjectKey]) {
+        gradesBySubject[subjectKey] = [];
       }
-      gradesBySubject[grade.libelleMatiere].push(grade);
+      gradesBySubject[subjectKey].push(grade);
     });
 
     return Object.entries(gradesBySubject).map(([matiere, notes]) => ({
@@ -69,16 +70,31 @@ export function GradesTable({ grades, coeficients }: GradesTableProps) {
     let totalWeightedGrade = 0;
     let totalWeight = 0;
 
+    const groupedSubjects: { [key: string]: { totalGrade: number; totalCoef: number } } = {};
+
     subjectGrades.forEach((subject) => {
-      const coef = coeficients[subject.matiere]; 
-      if (!coef) return; 
+      const [mainSubject] = subject.matiere.split(' ('); // Extract main subject
+      const coef = coeficients[mainSubject];
+      if (!coef) return;
 
       const average = calculateAverage(subject.notes, selectedTrimester);
       if (average === 'N/A') return;
 
       const numericAverage = parseFloat(average);
-      totalWeightedGrade += numericAverage * coef;
-      totalWeight += coef;
+
+      // Handle grouped subjects (like ENSEIGN.SCIENTIFIQUE)
+      if (groupedSubjects[mainSubject]) {
+        groupedSubjects[mainSubject].totalGrade += numericAverage * coef;
+        groupedSubjects[mainSubject].totalCoef += coef;
+      } else {
+        groupedSubjects[mainSubject] = { totalGrade: numericAverage * coef, totalCoef: coef };
+      }
+    });
+
+    // Aggregate grouped subject averages
+    Object.values(groupedSubjects).forEach(({ totalGrade, totalCoef }) => {
+      totalWeightedGrade += totalGrade;
+      totalWeight += totalCoef;
     });
 
     return totalWeight === 0 ? 'N/A' : (totalWeightedGrade / totalWeight).toFixed(2);

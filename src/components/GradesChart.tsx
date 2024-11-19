@@ -70,6 +70,7 @@ export function GradesChart({ grades }: GradesChartProps) {
 
   // Données pour le graphique avec Chart.js
   const data = {
+    type: 'line',
     labels: labels, // Mois
     datasets: [
       {
