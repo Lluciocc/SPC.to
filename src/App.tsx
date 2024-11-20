@@ -5,14 +5,8 @@ import { GradesTable } from './components/GradesTable';
 import { ThemeProvider } from './context/ThemeContext';
 import { UserMenu } from './components/UserMenu';
 import { PatchNotes } from './components/PatchNotes';
-import {
-  login,
-  validateQcm,
-  getGrades,
-  getQCM,
-  FinalLogin,
-} from './services/api';
-import type { User, Grade, Discipline } from './types/auth';
+import {login,validateQcm,getGrades,getQCM,FinalLogin } from './services/api';
+import type { User, Grade } from './types/auth';
 import { Question } from './components/QcmForm';
 import { InfoMessage } from './components/infoPopup';
 import { WarningMessage } from './components/warningPopup';
@@ -104,6 +98,8 @@ function App() {
     setPassStr(password);
     localStorage.setItem('username', username);
     localStorage.setItem('password', password);
+
+    localStorage.setItem('showPhoto', "yes"); // -> Settings.tsx
 
     try {
       console.warn('logged for the first time');

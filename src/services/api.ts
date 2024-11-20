@@ -250,6 +250,9 @@ export async function FinalLogin(
         prenom: account.prenom,
         classe: account.profile.classe.code,
         email: account.email,
+        etablissement: account.nomEtablissement,
+        photo: account.profile.photo,
+        phone: account.profile.telPortable,
       },
     };
   } catch (error) {

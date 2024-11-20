@@ -4,13 +4,22 @@ export interface LoginCredentials {
 }
 
 export interface User {
+  token: string;
   id: number;
   nom: string;
   prenom: string;
   classe: string;
   email: string;
+  sexe: string;
+  photo: string;
+  etablissement: string;
+  phone: string;
+  profile: {
+    sexe: string;
+    photo: string;
+    classe: { code: string; libelle: string };
+  };
 }
-
 export interface LoginResponse {
   code: number;
   token: string;
@@ -97,13 +106,16 @@ export interface FLog {
   data: {
     accounts: Array<{
       email:  string;
+      nomEtablissement: string;
       typeCompte: string;
       id: number;
       nom: string;
       prenom: string;
       profile: Array<{
         sexe: string;
+        photo: string;
         nomEtablissement: string;
+        telPortable: string;
         classe: Array<{
           libelle: string;
           code: string;

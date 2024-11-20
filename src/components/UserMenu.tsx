@@ -17,9 +17,23 @@ export function UserMenu({ user, onLogout, onShowPatchNotes }: UserMenuProps) {
   const [showLegal, setShowLegal] = useState(false);
   const [showDevNotes, setShowDevNotes] = useState(false);
   const [showParameters, setShowParameters] = useState(false);
+  const [imageError, setImageError] = useState(false);
+  const [showPhoto, setShowPhoto] = useState<boolean>(localStorage.getItem('showPhoto') !== 'no');
+
   const menuRef = useRef<HTMLDivElement>(null);
 
+  const photoUrl = user.photo.startsWith('http') ? user.photo : 'https:' + user.photo;
+
+  const handleImageError = () => {
+    setImageError(true);
+  };
+
   useEffect(() => {
+    const storedValue = localStorage.getItem('showPhoto');
+    if (storedValue) {
+      setShowPhoto(storedValue !== 'no');
+    }
+
     function handleClickOutside(event: MouseEvent) {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setIsOpen(false);
@@ -37,7 +51,16 @@ export function UserMenu({ user, onLogout, onShowPatchNotes }: UserMenuProps) {
         className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
       >
         <div className="w-10 h-10 rounded-full bg-indigo-600 dark:bg-indigo-500 flex items-center justify-center">
-          <User className="h-6 w-6 text-white" />
+        {!imageError && showPhoto ? (
+            <img
+              src={photoUrl}
+              alt="User"
+              className="w-full h-full rounded-full object-cover"
+              onError={handleImageError}
+            />
+          ) : (
+            <User className="h-6 w-6 text-white" />
+          )}
         </div>
         <div className="text-left hidden sm:block">
           <div className="text-sm font-medium text-gray-900 dark:text-white">
@@ -62,7 +85,7 @@ export function UserMenu({ user, onLogout, onShowPatchNotes }: UserMenuProps) {
         <div className="px-4 py-2 border-b border-gray-200 dark:border-gray-700">
           <p className="text-sm text-gray-700 dark:text-gray-300">Connecté en tant que</p>
           <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
-            {user?.prenom} {user?.nom}
+            {user?.prenom} {user?.nom}, {user.classe}
           </p>
         </div>
 

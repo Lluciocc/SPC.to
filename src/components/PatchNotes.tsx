@@ -6,9 +6,15 @@ interface PatchNotesProps {
 }
 
 export function PatchNotes({ onClose }: PatchNotesProps) {
-  const [activeVersion, setActiveVersion] = useState<'v1.0.1' | 'v1.0.0'>('v1.0.1');
+  const [activeVersion, setActiveVersion] = useState< 'v1.0.2'|'v1.0.1' | 'v1.0.0'>('v1.0.2');
 
   const notes = {
+    'v1.0.2' : [
+      '📈 Amélioration du système de graphiques !',
+      '⚙️ Ajout d\'un onglet paramètres qui affiche les informations de l\'utilisateur',
+      '💼 Amélioration de l\'expérience utilisateur avec des messages informatifs',
+      '⚡ Autres changements et optimisations...',
+    ],
     'v1.0.1': [
       '⭐ Ajout du calcul de la moyenne générale de l\'élève',
       '📈 Ajout d\'un graphique permettant de visualiser les notes pendant le trimestre',
@@ -47,7 +53,7 @@ export function PatchNotes({ onClose }: PatchNotesProps) {
           {Object.keys(notes).map((version) => (
             <button
               key={version}
-              onClick={() => setActiveVersion(version as 'v1.0.1' | 'v1.0.0')}
+              onClick={() => setActiveVersion(version as 'v1.0.1' | 'v1.0.0' | 'v1.0.2')}
               className={`text-sm font-medium ${
                 activeVersion === version
                   ? 'text-indigo-600 dark:text-indigo-300'
