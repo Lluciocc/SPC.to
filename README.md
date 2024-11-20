@@ -36,6 +36,9 @@ npm run host
 npm run preview
 ```
 
+## Current version
+- V1.0.2
+
 ## License
 
 The SPC.to webapp is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
