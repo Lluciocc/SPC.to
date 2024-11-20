@@ -145,17 +145,6 @@ export function GradesChart({ grades, coefficients }: GradesChartProps) {
         cubicInterpolationMode: 'monotone',
         pointRadius: 5, // Points visibles dès le début
         pointBackgroundColor: 'rgb(75, 192, 192)',
-        // Animation progressive de la ligne
-        animation: {
-          duration: 3000,  // Temps d'animation de la ligne
-          easing: 'easeInOutQuad',
-          onComplete: () => console.log('Animation terminée!'),
-          onProgress: (animation) => {
-            const progress = animation.currentStep / animation.numSteps;
-            // Limiter la ligne à progresser au fur et à mesure
-            data.datasets[0].data = data.datasets[0].data.slice(0, Math.floor(progress * data.datasets[0].data.length));
-          }
-        },
       },
     ],
   };
@@ -185,9 +174,9 @@ export function GradesChart({ grades, coefficients }: GradesChartProps) {
   };
 
   return (
-    <div>
-      <h1 className="text-xl font-semibold dark:text-white">Graphique des Moyennes Générales</h1>
-      <div style={{ width: '100%', height: '400px' }}>
+    <div className="w-full">
+      <h1 className="text-xl font-semibold dark:text-white mb-4">Graphique des Moyennes Générales</h1>
+      <div className="w-full h-64 sm:h-96">
         <Line data={data} options={options} />
       </div>
       {chartData.currentAverage && (

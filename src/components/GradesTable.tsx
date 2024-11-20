@@ -13,7 +13,7 @@ const parseGrade = (value: string): number => parseFloat(value.replace(',', '.')
 export function GradesTable({ grades, coeficients }: GradesTableProps) {
   const [selectedTrimester, setSelectedTrimester] = useState<number>(1);
   const [showChart, setShowChart] = useState<boolean>(false);
-  console.log(coeficients)
+
   const subjectGrades = useMemo(() => {
     const gradesBySubject: { [key: string]: Grade[] } = {};
     grades.forEach((grade) => {
@@ -115,12 +115,12 @@ export function GradesTable({ grades, coeficients }: GradesTableProps) {
   return (
     <div className="space-y-6">
       <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden transition-colors">
-        <div className="px-6 py-4 bg-indigo-600 dark:bg-indigo-500 text-white flex items-center justify-between">
+        <div className="px-6 py-4 bg-indigo-600 dark:bg-indigo-500 text-white flex items-center justify-between flex-wrap">
           <div className="flex items-center">
             <Calculator className="h-6 w-6 mr-2" />
             <h2 className="text-xl font-semibold">Moyennes par matière</h2>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 mt-4 sm:mt-0">
             <select
               value={selectedTrimester}
               onChange={(e) => setSelectedTrimester(Number(e.target.value))}
@@ -140,17 +140,17 @@ export function GradesTable({ grades, coeficients }: GradesTableProps) {
           </div>
         </div>
         {!showChart ? (
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+          <div className="overflow-x-auto sm:overflow-x-visible">
+            <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 table-auto w-full">
               <thead className="bg-gray-50 dark:bg-gray-700">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                     Matière
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                     Nombre de notes
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                     Moyenne
                   </th>
                 </tr>
@@ -162,13 +162,13 @@ export function GradesTable({ grades, coeficients }: GradesTableProps) {
 
                   return (
                     <tr key={index} className="hover:bg-gray-50 dark:hover:bg-gray-700">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
+                      <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
                         {subject.matiere}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                      <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                         {subject.notes.filter((n) => !n.nonSignificatif).length}
                       </td>
-                      <td className={`px-6 py-4 whitespace-nowrap text-sm font-semibold ${gradeColor}`}>
+                      <td className={`px-4 py-4 whitespace-nowrap text-sm font-semibold ${gradeColor}`}>
                         {average}
                       </td>
                     </tr>
