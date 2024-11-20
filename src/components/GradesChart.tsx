@@ -1,136 +1,203 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useMemo } from 'react';
+import { Grade } from '../types/auth';
 import { Line } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, LineElement, PointElement } from 'chart.js'; // Importer PointElement
-import type { Grade } from '../types/auth';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 
-// Enregistrement des composants de Chart.js, y compris PointElement
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, LineElement, PointElement);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 interface GradesChartProps {
   grades: Grade[];
+  coefficients: { [matiere: string]: number }; // Coefficients par matière
 }
 
-interface ChartData {
-  month: string;
-  average: number;
-}
+const parseGrade = (value: string): number => parseFloat(value.replace(',', '.'));
 
-export function GradesChart({ grades }: GradesChartProps) {
-  const chartRef = useRef<ChartJS | null>(null); // Référence au graphique Chart.js
+const calculateGeneralAverage = (grades: Grade[], coefficients: { [matiere: string]: number }) => {
+  const gradesBySubject: { [key: string]: Grade[] } = {};
 
-  const chartData = useMemo(() => {
-    if (!grades || grades.length === 0) {
-      console.warn('No grades data available');
-      return [];
+  grades.forEach((grade) => {
+    const subjectKey = grade.libelleMatiere + (grade.codeSousMatiere ? ` (${grade.codeSousMatiere})` : '');
+    if (!gradesBySubject[subjectKey]) {
+      gradesBySubject[subjectKey] = [];
     }
+    gradesBySubject[subjectKey].push(grade);
+  });
 
-    const monthlyGrades: { [key: string]: number[] } = {};
+  let totalWeightedGrade = 0;
+  let totalWeight = 0;
 
-    grades.forEach((grade) => {
-      if (!grade.valeur) {
-        console.warn('Grade without value:', grade);
-        return; // Si la note ne contient pas de valeur, on l'ignore
+  const groupedSubjects: { [key: string]: { totalGrade: number; totalCoef: number } } = {};
+
+  Object.entries(gradesBySubject).forEach(([matiere, notes]) => {
+    const [mainSubject] = matiere.split(' ('); // Extraire la matière principale
+    const coef = coefficients[mainSubject];
+    if (!coef) return;
+
+    let subjectTotalWeighted = 0;
+    let subjectTotalWeight = 0;
+
+    notes.forEach((note) => {
+      if (note.nonSignificatif || note.valeur.trim().toLowerCase() === 'abs') return;
+
+      const value = parseGrade(note.valeur);
+      const maxGrade = parseGrade(note.noteSur);
+      const noteCoef = parseFloat(note.coef);
+
+      if (!isNaN(value) && !isNaN(maxGrade) && !isNaN(noteCoef)) {
+        const normalizedGrade = (value / maxGrade) * 20;
+        subjectTotalWeighted += normalizedGrade * noteCoef;
+        subjectTotalWeight += noteCoef;
       }
-
-      const date = new Date(grade.date); // Date de la note
-      if (isNaN(date.getTime())) {
-        console.warn('Invalid date:', grade.date);
-        return; // Si la date est invalide, on l'ignore
-      }
-
-      const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
-
-      if (!monthlyGrades[monthKey]) {
-        monthlyGrades[monthKey] = [];
-      }
-
-      // Ajout de la note à la liste des notes pour le mois
-      const noteValue = parseFloat(grade.valeur);
-      monthlyGrades[monthKey].push(noteValue);
-
     });
 
+    if (subjectTotalWeight === 0) return;
 
-    return Object.entries(monthlyGrades)
-      .map(([month, notes]) => ({
-        month,
-        average: notes.reduce((a, b) => a + b, 0) / notes.length,
-      }))
-      .sort((a, b) => a.month.localeCompare(b.month));
-  }, [grades]);
+    const subjectAverage = subjectTotalWeighted / subjectTotalWeight;
 
-  console.log('Chart Data:', chartData); // Log pour vérifier chartData final
+    if (groupedSubjects[mainSubject]) {
+      groupedSubjects[mainSubject].totalGrade += subjectAverage * coef;
+      groupedSubjects[mainSubject].totalCoef += coef;
+    } else {
+      groupedSubjects[mainSubject] = { totalGrade: subjectAverage * coef, totalCoef: coef };
+    }
+  });
 
-  if (!chartData.length) {
-    return <div>No data available</div>;
-  }
+  Object.values(groupedSubjects).forEach(({ totalGrade, totalCoef }) => {
+    totalWeightedGrade += totalGrade;
+    totalWeight += totalCoef;
+  });
 
-  const labels = chartData.map((data) => data.month);
-  const averages = chartData.map((data) => data.average);
+  return totalWeight === 0 ? null : (totalWeightedGrade / totalWeight).toFixed(2);
+};
 
-  // Données pour le graphique avec Chart.js
+const calculateMonthlyAverages = (
+  grades: Grade[],
+  coefficients: { [matiere: string]: number }
+) => {
+  const monthlyPeriods: { [key: string]: { totalWeighted: number; totalCoef: number } } = {};
+
+  grades.forEach((grade) => {
+    const date = new Date(grade.date);
+    if (!grade.valeur || isNaN(date.getTime())) return;
+
+    const day = date.getDate();
+    const period = day <= 15 ? 'Début' : 'Milieu'; // Début ou milieu du mois
+    const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')} (${period})`;
+
+    const subjectKey = grade.libelleMatiere + (grade.codeSousMatiere ? ` (${grade.codeSousMatiere})` : '');
+    const [mainSubject] = subjectKey.split(' ('); // Extraire la matière principale
+    const coef = coefficients[mainSubject];
+    if (!coef) return;
+
+    const value = parseGrade(grade.valeur);
+    const maxGrade = parseGrade(grade.noteSur);
+    const noteCoef = parseFloat(grade.coef);
+
+    if (!isNaN(value) && !isNaN(maxGrade) && !isNaN(noteCoef)) {
+      const normalizedGrade = (value / maxGrade) * 20;
+
+      if (!monthlyPeriods[monthKey]) {
+        monthlyPeriods[monthKey] = { totalWeighted: 0, totalCoef: 0 };
+      }
+
+      monthlyPeriods[monthKey].totalWeighted += normalizedGrade * noteCoef * coef;
+      monthlyPeriods[monthKey].totalCoef += noteCoef * coef;
+    }
+  });
+
+  return Object.entries(monthlyPeriods)
+    .map(([period, { totalWeighted, totalCoef }]) => ({
+      period,
+      average: totalCoef > 0 ? totalWeighted / totalCoef : null,
+    }))
+    .filter((data) => data.average !== null)
+    .sort((a, b) => a.period.localeCompare(b.period));
+};
+
+export function GradesChart({ grades, coefficients }: GradesChartProps) {
+  const chartData = useMemo(() => {
+    if (!grades || grades.length === 0) return { points: [], currentAverage: null };
+
+    const monthlyAverages = calculateMonthlyAverages(grades, coefficients);
+    const currentAverage = calculateGeneralAverage(grades, coefficients);
+
+    // Ajouter la moyenne actuelle
+    const today = new Date();
+    monthlyAverages.push({
+      period: `Aujourd'hui`,
+      average: currentAverage ? parseFloat(currentAverage) : null,
+    });
+
+    return { points: monthlyAverages, currentAverage };
+  }, [grades, coefficients]);
+
+  // Configuration du graphique
   const data = {
-    type: 'line',
-    labels: labels, // Mois
+    labels: chartData.points.map((point) => point.period),
     datasets: [
       {
-        label: 'Moyenne des notes', // Pour la courbe
-        data: averages,
+        label: 'Moyenne mensuelle',
+        data: chartData.points.map((point) => point.average),
         fill: false,
-        borderColor: 'rgb(75, 192, 192)', // Couleur de la courbe
-        tension: 0.1, // Courbe lisse
-        borderWidth: 2,
-        pointRadius: 5, // Taille des points sur la courbe
-      },
-      {
-        label: 'Moyenne mensuelle', // Pour les barres
-        data: averages,
-        backgroundColor: 'rgba(75, 192, 192, 0.2)', // Couleur des barres
         borderColor: 'rgb(75, 192, 192)',
-        borderWidth: 1,
-        categoryPercentage: 0.5,
-        barPercentage: 0.5,
+        tension: 0.1,
+        borderWidth: 2,
+        cubicInterpolationMode: 'monotone',
+        pointRadius: 5, // Points visibles dès le début
+        pointBackgroundColor: 'rgb(75, 192, 192)',
+        // Animation progressive de la ligne
+        animation: {
+          duration: 3000,  // Temps d'animation de la ligne
+          easing: 'easeInOutQuad',
+          onComplete: () => console.log('Animation terminée!'),
+          onProgress: (animation) => {
+            const progress = animation.currentStep / animation.numSteps;
+            // Limiter la ligne à progresser au fur et à mesure
+            data.datasets[0].data = data.datasets[0].data.slice(0, Math.floor(progress * data.datasets[0].data.length));
+          }
+        },
       },
     ],
   };
 
-  // Options pour personnaliser le graphique
   const options = {
     responsive: true,
     plugins: {
-      legend: {
-        position: 'top',
+      title: {
+        display: true,
+        text: 'Moyennes mensuelles',
       },
       tooltip: {
         callbacks: {
-          label: function (context: any) {
-            return `${context.dataset.label}: ${context.raw.toFixed(2)}`;
-          },
+          label: (context: any) => `${context.raw} / 20`,
         },
       },
     },
     scales: {
       y: {
-        min: Math.min(...averages) - 1, // Plage de l'axe Y
-        max: Math.max(...averages) + 1,
-        beginAtZero: false, // L'axe Y commence à la valeur la plus basse
+        min: 0,
+        max: 20,
+        ticks: {
+          stepSize: 1,
+        },
       },
     },
   };
 
-  useEffect(() => {
-    if (chartRef.current) {
-      // Détruire le graphique précédent si nécessaire
-      chartRef.current.destroy();
-    }
-  }, [chartData]);
-
   return (
     <div>
-    <h1 className="text-xl font-semibold dark:text-white">Graphique des Notes</h1>
-    <div style={{ width: '100%', height: '400px' }}>
-      <Line data={data} options={options} />
+      <h1 className="text-xl font-semibold dark:text-white">Graphique des Moyennes Générales</h1>
+      <div style={{ width: '100%', height: '400px' }}>
+        <Line data={data} options={options} />
+      </div>
+      {chartData.currentAverage && (
+        <div className="text-right mt-4">
+          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Moyenne actuelle : </span>
+          <span className="text-lg font-bold text-indigo-600 dark:text-indigo-400">
+            {chartData.currentAverage}
+          </span>
+        </div>
+      )}
     </div>
-  </div>
   );
 }

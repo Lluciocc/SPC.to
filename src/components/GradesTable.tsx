@@ -13,7 +13,7 @@ const parseGrade = (value: string): number => parseFloat(value.replace(',', '.')
 export function GradesTable({ grades, coeficients }: GradesTableProps) {
   const [selectedTrimester, setSelectedTrimester] = useState<number>(1);
   const [showChart, setShowChart] = useState<boolean>(false);
-
+  console.log(coeficients)
   const subjectGrades = useMemo(() => {
     const gradesBySubject: { [key: string]: Grade[] } = {};
     grades.forEach((grade) => {
@@ -185,7 +185,7 @@ export function GradesTable({ grades, coeficients }: GradesTableProps) {
           </div>
         ) : (
           <div className="p-6">
-            <GradesChart grades={grades} />
+            <GradesChart grades={grades} coefficients={coeficients}/>
           </div>
         )}
       </div>
