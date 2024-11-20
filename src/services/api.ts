@@ -153,8 +153,6 @@ export async function getQCM(token: string) {
 
     const dataq = await handleApiResponse<QCMResponse>(response);
 
-    console.log('QCM Data:', dataq);
-
     if (dataq && dataq.code === 200 && dataq.data) {
       return {
         id: 1,

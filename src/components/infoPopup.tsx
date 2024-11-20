@@ -4,7 +4,7 @@ import { X } from 'lucide-react';
 export function InfoMessage({ info }: { info: string }) {
   const [isVisible, setIsVisible] = useState(true);
   const [isClosing, setIsClosing] = useState(false); // Pour gérer l'animation
-
+  
   const handleClose = () => {
     setIsClosing(true);
     setTimeout(() => setIsVisible(false), 300); // Attendre la fin de l'animation avant de masquer complètement
