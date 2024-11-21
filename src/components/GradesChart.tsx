@@ -108,7 +108,7 @@ const calculateMonthlyAverages = (
   return Object.entries(monthlyPeriods)
     .map(([period, { totalWeighted, totalCoef }]) => ({
       period,
-      average: totalCoef > 0 ? totalWeighted / totalCoef : null,
+      average: totalCoef > 0 ? (totalWeighted / totalCoef).toFixed(2) : null,
     }))
     .filter((data) => data.average !== null)
     .sort((a, b) => a.period.localeCompare(b.period));
