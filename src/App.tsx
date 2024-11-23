@@ -212,10 +212,9 @@ function App() {
                   <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
                     Tableau de bord
                   </h1>
-                  <p className="text-gray-600 dark:text-gray-300 ">
+                  <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm md:text-base lg:text-base hidden md:block">
                     {getRandomPhrase()}
                   </p>
-                  
                 <UserMenu
                   user={user}
                   onLogout={handleLogout}
