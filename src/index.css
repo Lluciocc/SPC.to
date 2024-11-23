@@ -48,6 +48,10 @@
   }
 }
 
+canvas {
+	display: block;
+}
+
 /* Animation pour les popups */
 @keyframes popup {
   from {
@@ -58,4 +62,28 @@
     opacity: 1;
     transform: scale(1) translateY(0);
   }
+}
+
+.snow-container {
+  position: relative;  /* Assurez-vous que la position de l'élément parent soit relative */
+  width: 100%;
+  height: 150px;  /* Ajustez la hauteur pour qu'il y ait suffisamment d'espace pour la neige */
+  overflow: hidden;  /* Cache les débordements pour éviter que l'effet de neige ne dépasse */
+}
+
+.snow-pile {
+  --overflow-x: 4px;
+  --snow-image: url('https://assets.codepen.io/4175254/snow-cap-test-2.png');
+  content: '';
+  position: absolute;
+  top: 0;  /* Positionnez-le tout en haut de la div */
+  left: calc(var(--overflow-x) * -1);
+  border-image-source: var(--snow-image);
+  border-image-slice: calc(6 * 56 / 20) fill;
+  border-image-width: calc(28px / 3);
+  border-image-repeat: round;
+  width: calc(100% + var(--overflow-x) * 2);
+  height: 28px;  /* Hauteur de l'effet de neige */
+  filter: drop-shadow(0 2px 1px rgb(0 0 0 / .25));
+  opacity: 1;
 }

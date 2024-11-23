@@ -5,11 +5,24 @@ import { GradesTable } from './components/GradesTable';
 import { ThemeProvider } from './context/ThemeContext';
 import { UserMenu } from './components/UserMenu';
 import { PatchNotes } from './components/PatchNotes';
-import {login,validateQcm,getGrades,getQCM,FinalLogin } from './services/api';
+import { login, validateQcm, getGrades, getQCM, FinalLogin } from './services/api';
 import type { User, Grade } from './types/auth';
 import { Question } from './components/QcmForm';
 import { InfoMessage } from './components/infoPopup';
 import { WarningMessage } from './components/warningPopup';
+import { getRandomPhrase } from './utils/motivate';
+
+import { Snow } from './context/SnowFall';  
+import { C_Light } from './context/light_bulb';
+
+/*
+to add in the 1 december ->
+Snow Fall in app.tsx -> src/context/snowfall.tsx
+Christmas hat in Usermenu.tsx,
+lightbulb -> src/context/light_bulb.tsx
+...
+
+*/
 
 interface AuthUser extends User {
   token: string;
@@ -26,7 +39,6 @@ function App() {
   const [usernameStr, setUsernameStr] = useState<string>('');
   const [passStr, setPassStr] = useState<string>('');
   const [showPatchNotes, setShowPatchNotes] = useState(false);
-
   const [warning, setWarning] = useState<string>('');
   const [coefficients, setCoefficients] = useState<{ [key: string]: number }>({});
 
@@ -65,12 +77,11 @@ function App() {
 
         const gradesData = await getGrades(token, account.id);
         const periodeActuelle = gradesData.periodes.find(
-          (periode) => periode.codePeriode === 'A001' 
+          (periode) => periode.codePeriode === 'A001'
         );
 
         if (periodeActuelle && periodeActuelle.ensembleMatieres?.disciplines) {
           const disciplines = periodeActuelle.ensembleMatieres.disciplines;
-
 
           const coefficients = disciplines.reduce((acc, discipline) => {
             acc[discipline.discipline] = discipline.coef;
@@ -78,7 +89,6 @@ function App() {
           }, {});
 
           setCoefficients(coefficients);
-
           setGrades(gradesData.notes);
         } else {
           console.warn('Période ou disciplines introuvables dans les données.');
@@ -98,7 +108,6 @@ function App() {
     setPassStr(password);
     localStorage.setItem('username', username);
     localStorage.setItem('password', password);
-
     localStorage.setItem('showPhoto', "yes"); // -> Settings.tsx
 
     try {
@@ -146,20 +155,18 @@ function App() {
 
       const gradesData = await getGrades(token, account.id);
       const periodeActuelle = gradesData.periodes.find(
-        (periode) => periode.codePeriode === 'A001' 
+        (periode) => periode.codePeriode === 'A001'
       );
 
       if (periodeActuelle && periodeActuelle.ensembleMatieres?.disciplines) {
         const disciplines = periodeActuelle.ensembleMatieres.disciplines;
 
-       
         const coefficients = disciplines.reduce((acc, discipline) => {
           acc[discipline.discipline] = discipline.coef;
           return acc;
         }, {});
 
-        setCoefficients(coefficients); 
-
+        setCoefficients(coefficients);
         setGrades(gradesData.notes);
       } else {
         console.warn('Période ou disciplines introuvables dans les données.');
@@ -185,6 +192,11 @@ function App() {
   return (
     <ThemeProvider>
       <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors">
+        {/*
+        <Snow/> Snow effect for christmas
+        <C_Light></C_Light> -> light bulb 
+        -> remove from comment when ready, don't forgot usermenu hat
+        */}
         <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
           {error && (
             <div className="mb-4 bg-red-50 dark:bg-red-900/50 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-200 px-4 py-3 rounded relative">
@@ -197,14 +209,13 @@ function App() {
           {user ? (
             <div className="space-y-6">
               <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg p-4 flex justify-between items-center">
-                <div>
                   <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
                     Tableau de bord
                   </h1>
-                  <p className="text-gray-600 dark:text-gray-300">
-                    Consultez vos moyennes en temps réel
+                  <p className="text-gray-600 dark:text-gray-300 ">
+                    {getRandomPhrase()}
                   </p>
-                </div>
+                  
                 <UserMenu
                   user={user}
                   onLogout={handleLogout}
