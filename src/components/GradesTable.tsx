@@ -1,23 +1,76 @@
-import React, { useState, useMemo } from 'react';
-import { Calculator, ChevronDown } from 'lucide-react';
-import type { Grade } from '../types/auth';
-import { GradesChart } from './GradesChart';
+import React, { useState, useMemo } from "react";
+import { Calculator, ChevronDown } from "lucide-react";
+import type { Grade } from "../types/auth";
+import { GradesChart } from "./GradesChart";
 
-interface GradesTableProps {
-  grades: Grade[];
-  coeficients: { [matiere: string]: number }; // clé : nom de la matière, valeur : coefficient
-}
+// Helper functions
+const parseGrade = (value: string): number =>
+  parseFloat(value.replace(",", "."));
 
-const parseGrade = (value: string): number => parseFloat(value.replace(',', '.'));
+const safeParseFloat = (value: any) => {
+  const parsedValue = parseFloat(value?.replace(",", "."));
+  return isNaN(parsedValue) ? "N/A" : parsedValue;
+};
+
+const calcAverage = (grades: Grade[], scale: number = 20) => {
+  let totalWeighted = 0;
+  let totalCoef = 0;
+
+  grades.forEach((grade) => {
+    if (
+      grade.nonSignificatif ||
+      ["Abs", "Disp", "NE", "EA"].includes(grade.valeur)
+    )
+      return;
+
+    const value = parseGrade(grade.valeur);
+    const maxGrade = parseGrade(grade.noteSur);
+    const coef = parseFloat(grade.coef);
+
+    if (!isNaN(value) && !isNaN(maxGrade) && !isNaN(coef)) {
+      totalWeighted += (value / maxGrade) * scale * coef;
+      totalCoef += coef;
+    }
+  });
+
+  return totalCoef === 0 ? "N/A" : (totalWeighted / totalCoef).toFixed(2);
+};
+
+const calcGeneralAverage = (
+  subjects: { matiere: string; notes: Grade[] }[],
+  coefficients: { [matiere: string]: number },
+  scale: number = 20
+) => {
+  let totalWeighted = 0;
+  let totalCoef = 0;
+
+  subjects.forEach((subject) => {
+    const mainSubject = subject.matiere.split(" (")[0];
+    const coef = coefficients[mainSubject] || 0;
+    const average = calcAverage(subject.notes, scale);
+
+    if (average !== "N/A") {
+      totalWeighted += parseFloat(average) * coef;
+      totalCoef += coef;
+    }
+  });
+
+  return totalCoef === 0 ? "N/A" : (totalWeighted / totalCoef).toFixed(2);
+};
 
 export function GradesTable({ grades, coeficients }: GradesTableProps) {
   const [selectedTrimester, setSelectedTrimester] = useState<number>(1);
   const [showChart, setShowChart] = useState<boolean>(false);
 
+  console.log(coeficients)
+
   const subjectGrades = useMemo(() => {
     const gradesBySubject: { [key: string]: Grade[] } = {};
+
     grades.forEach((grade) => {
-      const subjectKey = grade.libelleMatiere + (grade.codeSousMatiere ? ` (${grade.codeSousMatiere})` : '');
+      const subjectKey = `${grade.libelleMatiere}${
+        grade.codeSousMatiere ? ` (${grade.codeSousMatiere})` : ""
+      }`;
       if (!gradesBySubject[subjectKey]) {
         gradesBySubject[subjectKey] = [];
       }
@@ -26,16 +79,24 @@ export function GradesTable({ grades, coeficients }: GradesTableProps) {
 
     return Object.entries(gradesBySubject).map(([matiere, notes]) => ({
       matiere,
-      notes: notes.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()),
+      notes: notes.sort(
+        (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+      ),
     }));
   }, [grades]);
 
-  const calculateAverage = (notes: Grade[], trimester: number) => {
-    const trimesterNotes = notes.filter((note) => {
-      if (note.nonSignificatif || note.valeur.trim().toLowerCase() === 'abs') return false;
+  const filteredGrades = (notes: Grade[]) =>
+    notes.filter((note) => {
+      if (
+        note.nonSignificatif ||
+        ["Abs", "Disp", "NE", "EA"].includes(note.valeur)
+      )
+        return false;
+
       const noteDate = new Date(note.date);
       const month = noteDate.getMonth() + 1;
-      switch (trimester) {
+
+      switch (selectedTrimester) {
         case 1:
           return month >= 9 && month <= 11; // Sept-Nov
         case 2:
@@ -47,69 +108,27 @@ export function GradesTable({ grades, coeficients }: GradesTableProps) {
       }
     });
 
-    if (trimesterNotes.length === 0) return 'N/A';
-
-    let totalWeightedGrade = 0;
-    let totalWeight = 0;
-
-    trimesterNotes.forEach((note) => {
-      const value = parseGrade(note.valeur);
-      const maxGrade = parseGrade(note.noteSur);
-      const coef = parseFloat(note.coef);
-
-      const normalizedGrade = (value / maxGrade) * 20;
-
-      totalWeightedGrade += normalizedGrade * coef;
-      totalWeight += coef;
-    });
-
-    return totalWeight === 0 ? 'N/A' : (totalWeightedGrade / totalWeight).toFixed(2);
-  };
-
-  const calculateGeneralAverage = () => {
-    let totalWeightedGrade = 0;
-    let totalWeight = 0;
-
-    const groupedSubjects: { [key: string]: { totalGrade: number; totalCoef: number } } = {};
-
-    subjectGrades.forEach((subject) => {
-      const [mainSubject] = subject.matiere.split(' ('); // Extract main subject
-      const coef = coeficients[mainSubject];
-      if (!coef) return;
-
-      const average = calculateAverage(subject.notes, selectedTrimester);
-      if (average === 'N/A') return;
-
-      const numericAverage = parseFloat(average);
-
-      // Handle grouped subjects (like ENSEIGN.SCIENTIFIQUE)
-      if (groupedSubjects[mainSubject]) {
-        groupedSubjects[mainSubject].totalGrade += numericAverage * coef;
-        groupedSubjects[mainSubject].totalCoef += coef;
-      } else {
-        groupedSubjects[mainSubject] = { totalGrade: numericAverage * coef, totalCoef: coef };
-      }
-    });
-
-    // Aggregate grouped subject averages
-    Object.values(groupedSubjects).forEach(({ totalGrade, totalCoef }) => {
-      totalWeightedGrade += totalGrade;
-      totalWeight += totalCoef;
-    });
-
-    return totalWeight === 0 ? 'N/A' : (totalWeightedGrade / totalWeight).toFixed(2);
-  };
-
-  const generalAverage = useMemo(calculateGeneralAverage, [subjectGrades, coeficients, selectedTrimester]);
+  const generalAverage = useMemo(
+    () =>
+      calcGeneralAverage(
+        subjectGrades.map((subject) => ({
+          matiere: subject.matiere,
+          notes: filteredGrades(subject.notes),
+        })),
+        coeficients
+      ),
+    [subjectGrades, coeficients, selectedTrimester]
+  );
 
   const getGradeColor = (average: string | number) => {
-    if (average === 'N/A') return 'text-gray-500 dark:text-gray-400';
-    const numericAverage = typeof average === 'string' ? parseFloat(average) : average;
-    if (numericAverage >= 16) return 'text-green-600 dark:text-green-400';
-    if (numericAverage >= 14) return 'text-emerald-600 dark:text-emerald-400';
-    if (numericAverage >= 12) return 'text-blue-600 dark:text-blue-400';
-    if (numericAverage >= 10) return 'text-yellow-600 dark:text-yellow-400';
-    return 'text-red-600 dark:text-red-400';
+    if (average === "N/A") return "text-gray-500 dark:text-gray-400";
+    const numericAverage =
+      typeof average === "string" ? parseFloat(average) : average;
+    if (numericAverage >= 16) return "text-green-600 dark:text-green-400";
+    if (numericAverage >= 14) return "text-emerald-600 dark:text-emerald-400";
+    if (numericAverage >= 12) return "text-blue-600 dark:text-blue-400";
+    if (numericAverage >= 10) return "text-yellow-600 dark:text-yellow-400";
+    return "text-red-600 dark:text-red-400";
   };
 
   return (
@@ -134,8 +153,12 @@ export function GradesTable({ grades, coeficients }: GradesTableProps) {
               onClick={() => setShowChart(!showChart)}
               className="flex items-center gap-1 bg-white/10 rounded-lg px-3 py-1 text-sm font-medium hover:bg-white/20 transition-colors"
             >
-              {showChart ? 'Voir tableau' : 'Voir graphique'}
-              <ChevronDown className={`h-4 w-4 transition-transform ${showChart ? 'rotate-180' : ''}`} />
+              {showChart ? "Voir tableau" : "Voir graphique"}
+              <ChevronDown
+                className={`h-4 w-4 transition-transform ${
+                  showChart ? "rotate-180" : ""
+                }`}
+              />
             </button>
           </div>
         </div>
@@ -157,18 +180,26 @@ export function GradesTable({ grades, coeficients }: GradesTableProps) {
               </thead>
               <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                 {subjectGrades.map((subject, index) => {
-                  const average = calculateAverage(subject.notes, selectedTrimester);
+                  const average = calcAverage(
+                    filteredGrades(subject.notes),
+                    20
+                  );
                   const gradeColor = getGradeColor(average);
 
                   return (
-                    <tr key={index} className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                    <tr
+                      key={index}
+                      className="hover:bg-gray-50 dark:hover:bg-gray-700"
+                    >
                       <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
                         {subject.matiere}
                       </td>
                       <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                         {subject.notes.filter((n) => !n.nonSignificatif).length}
                       </td>
-                      <td className={`px-4 py-4 whitespace-nowrap text-sm font-semibold ${gradeColor}`}>
+                      <td
+                        className={`px-4 py-4 whitespace-nowrap text-sm font-semibold ${gradeColor}`}
+                      >
                         {average}
                       </td>
                     </tr>
@@ -177,7 +208,9 @@ export function GradesTable({ grades, coeficients }: GradesTableProps) {
               </tbody>
             </table>
             <div className="px-6 py-4 text-right">
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Moyenne Générale : </span>
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                Moyenne Générale :{" "}
+              </span>
               <span className={`text-lg font-bold ${getGradeColor(generalAverage)}`}>
                 {generalAverage}
               </span>
