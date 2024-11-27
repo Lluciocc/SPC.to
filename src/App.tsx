@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { LoginForm } from './components/LoginForm';
 import { QcmForm } from './components/QcmForm';
@@ -84,7 +85,7 @@ function App() {
           const disciplines = periodeActuelle.ensembleMatieres.disciplines;
 
           const coefficients = disciplines.reduce((acc, discipline) => {
-            acc[discipline.discipline] = discipline.coef;
+            acc[discipline.codeMatiere] = discipline.coef; // Utiliser codeMatiere comme clé
             return acc;
           }, {});
 
@@ -162,7 +163,7 @@ function App() {
         const disciplines = periodeActuelle.ensembleMatieres.disciplines;
 
         const coefficients = disciplines.reduce((acc, discipline) => {
-          acc[discipline.discipline] = discipline.coef;
+          acc[discipline.codeMatiere] = discipline.coef;
           return acc;
         }, {});
 
