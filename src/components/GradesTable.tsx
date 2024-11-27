@@ -198,7 +198,7 @@ export function GradesTable({ grades, coeficients }: GradesTableProps) {
                       className="hover:bg-gray-50 dark:hover:bg-gray-700"
                     >
                       <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
-                        {subject.matiere}
+                        {subject.matiere} ({subject.codeMatiere})
                       </td>
                       <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                         {subject.notes.filter((n) => !n.nonSignificatif).length}
