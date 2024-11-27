@@ -36,8 +36,9 @@ npm run host
 npm run preview
 ```
 
-## Current version
-- V1.0.2
+> [!NOTE]
+> V1.0.2
+> __Current version__
 
 ## License
 
