@@ -1,5 +1,8 @@
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> a30ea67c810d8b95a8ac4ef8bd9c1f14d8a9d237
 import React, { useState, useMemo } from "react";
 import { Calculator, ChevronDown } from "lucide-react";
 import type { Grade } from "../types/auth";

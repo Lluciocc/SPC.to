@@ -6,10 +6,18 @@ interface PatchNotesProps {
 }
 
 export function PatchNotes({ onClose }: PatchNotesProps) {
-  const [activeVersion, setActiveVersion] = useState< 'v1.0.2'|'v1.0.1' | 'v1.0.0'>('v1.0.2');
+  const [activeVersion, setActiveVersion] = useState<'v1.0.2' | 'v1.0.1' | 'v1.0.0'>('v1.0.2');
+  const [isClosing, setIsClosing] = useState(false);
+
+  const handleClose = () => {
+    setIsClosing(true); // Déclenche l'animation de fermeture
+    setTimeout(() => {
+      onClose(); // Appelle la fonction onClose après la fermeture
+    }, 300); // Durée de l'animation CSS
+  };
 
   const notes = {
-    'v1.0.2' : [
+    'v1.0.2': [
       '📈 Amélioration du système de graphiques !',
       '⚙️ Ajout d\'un onglet paramètres qui affiche les informations de l\'utilisateur',
       '💼 Amélioration de l\'expérience utilisateur avec des messages informatifs',
@@ -32,8 +40,16 @@ export function PatchNotes({ onClose }: PatchNotesProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 dark:bg-black/70 flex items-center justify-center p-4 z-50">
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-2xl max-h-[80vh] overflow-hidden transform transition-all duration-300 ease-in-out animate-in">
+    <div
+      className={`fixed inset-0 bg-black/50 dark:bg-black/70 flex items-center justify-center p-4 z-50 transition-opacity duration-300 ${
+        isClosing ? 'opacity-0' : 'opacity-100'
+      }`}
+    >
+      <div
+        className={`bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-2xl max-h-[80vh] overflow-hidden transform transition-all duration-300 ease-in-out ${
+          isClosing ? 'animate-pop-out' : 'animate-pop-in'
+        }`}
+      >
         <div className="p-6 flex justify-between items-start border-b border-gray-200 dark:border-gray-700">
           <div>
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Notes de mise à jour</h2>
@@ -42,7 +58,7 @@ export function PatchNotes({ onClose }: PatchNotesProps) {
             </p>
           </div>
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="rounded-lg p-1 text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400 transition-colors"
           >
             <X className="h-6 w-6" />
