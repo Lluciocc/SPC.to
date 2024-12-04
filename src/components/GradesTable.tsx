@@ -1,3 +1,5 @@
+
+
 import React, { useState, useMemo } from "react";
 import { Calculator, ChevronDown } from "lucide-react";
 import type { Grade } from "../types/auth";
@@ -37,16 +39,15 @@ const calcAverage = (grades: Grade[], scale: number = 20) => {
 };
 
 const calcGeneralAverage = (
-  subjects: { matiere: string; notes: Grade[] }[],
-  coefficients: { [matiere: string]: number },
+  subjects: { matiere: string; codeMatiere: string; notes: Grade[] }[],
+  coefficients: { [codeMatiere: string]: number },
   scale: number = 20
 ) => {
   let totalWeighted = 0;
   let totalCoef = 0;
 
   subjects.forEach((subject) => {
-    const mainSubject = subject.matiere.split(" (")[0];
-    const coef = coefficients[mainSubject] || 0;
+    const coef = coefficients[subject.codeMatiere] || 0; // Utiliser codeMatiere ici
     const average = calcAverage(subject.notes, scale);
 
     if (average !== "N/A") {
@@ -59,27 +60,33 @@ const calcGeneralAverage = (
 };
 
 export function GradesTable({ grades, coeficients }: GradesTableProps) {
-  const [selectedTrimester, setSelectedTrimester] = useState<number>(1);
+  const [selectedTrimester, setSelectedTrimester] = useState<number>(1); // Déclarez selectedTrimester
   const [showChart, setShowChart] = useState<boolean>(false);
 
   console.log(coeficients)
 
   const subjectGrades = useMemo(() => {
-    const gradesBySubject: { [key: string]: Grade[] } = {};
+    const gradesBySubject: { [key: string]: { matiere: string; notes: Grade[]; codeMatiere: string } } = {};
 
     grades.forEach((grade) => {
       const subjectKey = `${grade.libelleMatiere}${
         grade.codeSousMatiere ? ` (${grade.codeSousMatiere})` : ""
       }`;
+
       if (!gradesBySubject[subjectKey]) {
-        gradesBySubject[subjectKey] = [];
+        gradesBySubject[subjectKey] = {
+          matiere: grade.libelleMatiere,
+          codeMatiere: grade.codeMatiere, // Stocker le code matière unique
+          notes: [],
+        };
       }
-      gradesBySubject[subjectKey].push(grade);
+
+      gradesBySubject[subjectKey].notes.push(grade);
     });
 
-    return Object.entries(gradesBySubject).map(([matiere, notes]) => ({
-      matiere,
-      notes: notes.sort(
+    return Object.values(gradesBySubject).map((subject) => ({
+      ...subject,
+      notes: subject.notes.sort(
         (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
       ),
     }));
@@ -107,12 +114,12 @@ export function GradesTable({ grades, coeficients }: GradesTableProps) {
           return true;
       }
     });
-
   const generalAverage = useMemo(
     () =>
       calcGeneralAverage(
         subjectGrades.map((subject) => ({
           matiere: subject.matiere,
+          codeMatiere: subject.codeMatiere, // Passer le codeMatiere ici
           notes: filteredGrades(subject.notes),
         })),
         coeficients
@@ -192,7 +199,7 @@ export function GradesTable({ grades, coeficients }: GradesTableProps) {
                       className="hover:bg-gray-50 dark:hover:bg-gray-700"
                     >
                       <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
-                        {subject.matiere}
+                        {subject.matiere} ({subject.codeMatiere})
                       </td>
                       <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                         {subject.notes.filter((n) => !n.nonSignificatif).length}

@@ -15,15 +15,6 @@ import { getRandomPhrase } from './utils/motivate';
 import { Snow } from './context/SnowFall';  
 import { C_Light } from './context/light_bulb';
 
-/*
-to add in the 1 december ->
-Snow Fall in app.tsx -> src/context/snowfall.tsx
-Christmas hat in Usermenu.tsx,
-lightbulb -> src/context/light_bulb.tsx
-...
-
-*/
-
 interface AuthUser extends User {
   token: string;
 }
@@ -84,7 +75,7 @@ function App() {
           const disciplines = periodeActuelle.ensembleMatieres.disciplines;
 
           const coefficients = disciplines.reduce((acc, discipline) => {
-            acc[discipline.discipline] = discipline.coef;
+            acc[discipline.codeMatiere] = discipline.coef; // Utiliser codeMatiere comme clé
             return acc;
           }, {});
 
@@ -162,7 +153,7 @@ function App() {
         const disciplines = periodeActuelle.ensembleMatieres.disciplines;
 
         const coefficients = disciplines.reduce((acc, discipline) => {
-          acc[discipline.discipline] = discipline.coef;
+          acc[discipline.codeMatiere] = discipline.coef;
           return acc;
         }, {});
 
@@ -192,11 +183,8 @@ function App() {
   return (
     <ThemeProvider>
       <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors">
-        {/*
-        <Snow/> Snow effect for christmas
-        <C_Light></C_Light> -> light bulb 
-        -> remove from comment when ready, don't forgot usermenu hat
-        */}
+        <Snow/>
+        <C_Light></C_Light>
         <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
           {error && (
             <div className="mb-4 bg-red-50 dark:bg-red-900/50 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-200 px-4 py-3 rounded relative">

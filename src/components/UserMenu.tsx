@@ -62,14 +62,12 @@ export function UserMenu({ user, onLogout, onShowPatchNotes }: UserMenuProps) {
           ) : (
             <User className="h-6 w-6 text-white" />
           )}
-          {/*
           <img
             src={santaHat}
             alt="Santa Hat"
             className="absolute top-[-4px] left-0 w-14 h-14 transform translate-x-1 -translate-y-2 rotate-12"
             style={{ pointerEvents: 'none' }}
           />
-          */}
         </div>
         <div className="text-left hidden sm:block">
           <div className="text-sm font-medium text-gray-900 dark:text-white">
