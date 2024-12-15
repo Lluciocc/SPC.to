@@ -1,7 +1,9 @@
-import React, { useState, useMemo } from "react";
+
+import React, { useState, useMemo, useEffect } from "react";
 import { Calculator, ChevronDown } from "lucide-react";
 import type { Grade } from "../types/auth";
 import { GradesChart } from "./GradesChart";
+import { NotesPopup } from "./NotePopup";
 
 // Helper functions
 const parseGrade = (value: string): number =>
@@ -57,14 +59,26 @@ const calcGeneralAverage = (
   return totalCoef === 0 ? "N/A" : (totalWeighted / totalCoef).toFixed(2);
 };
 
-export function GradesTable({ grades, coeficients }: GradesTableProps) {
-  const [selectedTrimester, setSelectedTrimester] = useState<number>(1); // Déclarez selectedTrimester
-  const [showChart, setShowChart] = useState<boolean>(false);
+const getGradeColor = (average: string | number) => {
+  if (average === "N/A") return "text-gray-500 dark:text-gray-400";
+  const numericAverage =
+    typeof average === "string" ? parseFloat(average) : average;
+  if (numericAverage >= 16) return "text-green-600 dark:text-green-400";
+  if (numericAverage >= 14) return "text-emerald-600 dark:text-emerald-400";
+  if (numericAverage >= 12) return "text-blue-600 dark:text-blue-400";
+  if (numericAverage >= 10) return "text-yellow-600 dark:text-yellow-400";
+  return "text-red-600 dark:text-red-400";
+};
 
-  console.log(coeficients)
+export function GradesTable({ grades, coeficients }: GradesTableProps) {
+  const [selectedTrimester, setSelectedTrimester] = useState<string>("A001");
+  const [showChart, setShowChart] = useState<boolean>(false);
+  const [selectedSubject, setSelectedSubject] = useState<string>("");
+  const [showNotePopup, setShowNotePopup] = useState(false);
+  const [currentPeriod, setCurrentPeriod] = useState<string>("");
 
   const subjectGrades = useMemo(() => {
-    const gradesBySubject: { [key: string]: { matiere: string; notes: Grade[]; codeMatiere: string } } = {};
+    const gradesBySubject: { [key: string]: { matiere: string; notes: Grade[]; codeMatiere: string; prof: string } } = {};
 
     grades.forEach((grade) => {
       const subjectKey = `${grade.libelleMatiere}${
@@ -74,7 +88,8 @@ export function GradesTable({ grades, coeficients }: GradesTableProps) {
       if (!gradesBySubject[subjectKey]) {
         gradesBySubject[subjectKey] = {
           matiere: grade.libelleMatiere,
-          codeMatiere: grade.codeMatiere, // Stocker le code matière unique
+          prof: grade.professeur || "Inconnu",
+          codeMatiere: grade.codeMatiere,
           notes: [],
         };
       }
@@ -102,22 +117,24 @@ export function GradesTable({ grades, coeficients }: GradesTableProps) {
       const month = noteDate.getMonth() + 1;
 
       switch (selectedTrimester) {
-        case 1:
+        case "A001":
           return month >= 9 && month <= 11; // Sept-Nov
-        case 2:
+        case "A002":
           return month >= 12 || month <= 2; // Dec-Feb
-        case 3:
+        case "A003":
           return month >= 3 && month <= 6; // Mar-Jun
         default:
           return true;
       }
     });
+
+
   const generalAverage = useMemo(
     () =>
       calcGeneralAverage(
         subjectGrades.map((subject) => ({
           matiere: subject.matiere,
-          codeMatiere: subject.codeMatiere, // Passer le codeMatiere ici
+          codeMatiere: subject.codeMatiere,
           notes: filteredGrades(subject.notes),
         })),
         coeficients
@@ -125,20 +142,10 @@ export function GradesTable({ grades, coeficients }: GradesTableProps) {
     [subjectGrades, coeficients, selectedTrimester]
   );
 
-  const getGradeColor = (average: string | number) => {
-    if (average === "N/A") return "text-gray-500 dark:text-gray-400";
-    const numericAverage =
-      typeof average === "string" ? parseFloat(average) : average;
-    if (numericAverage >= 16) return "text-green-600 dark:text-green-400";
-    if (numericAverage >= 14) return "text-emerald-600 dark:text-emerald-400";
-    if (numericAverage >= 12) return "text-blue-600 dark:text-blue-400";
-    if (numericAverage >= 10) return "text-yellow-600 dark:text-yellow-400";
-    return "text-red-600 dark:text-red-400";
-  };
-
   return (
     <div className="space-y-6">
       <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden transition-colors">
+        {/* Header */}
         <div className="px-6 py-4 bg-indigo-600 dark:bg-indigo-500 text-white flex items-center justify-between flex-wrap">
           <div className="flex items-center">
             <Calculator className="h-6 w-6 mr-2" />
@@ -147,12 +154,12 @@ export function GradesTable({ grades, coeficients }: GradesTableProps) {
           <div className="flex items-center gap-4 mt-4 sm:mt-0">
             <select
               value={selectedTrimester}
-              onChange={(e) => setSelectedTrimester(Number(e.target.value))}
+              onChange={(e) => setSelectedTrimester(e.target.value)}
               className="bg-white/10 rounded-lg px-3 py-1 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-white/20"
             >
-              <option value={1}>1er Trimestre</option>
-              <option value={2}>2ème Trimestre</option>
-              <option value={3}>3ème Trimestre</option>
+              <option value={"A001"}>1er Trimestre</option>
+              <option value={"A002"}>2ème Trimestre</option>
+              <option value={"A003"}>3ème Trimestre</option>
             </select>
             <button
               onClick={() => setShowChart(!showChart)}
@@ -167,6 +174,8 @@ export function GradesTable({ grades, coeficients }: GradesTableProps) {
             </button>
           </div>
         </div>
+
+        {/* Content */}
         {!showChart ? (
           <div className="overflow-x-auto sm:overflow-x-visible">
             <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 table-auto w-full">
@@ -194,13 +203,14 @@ export function GradesTable({ grades, coeficients }: GradesTableProps) {
                   return (
                     <tr
                       key={index}
-                      className="hover:bg-gray-50 dark:hover:bg-gray-700"
+                      className="hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer"
+                      onClick={() => {setSelectedSubject(subject), setShowNotePopup(true)}}
                     >
                       <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
-                        {subject.matiere} ({subject.codeMatiere})
+                        {subject.matiere}
                       </td>
                       <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                        {subject.notes.filter((n) => !n.nonSignificatif).length}
+                        {subject.notes.length}
                       </td>
                       <td
                         className={`px-4 py-4 whitespace-nowrap text-sm font-semibold ${gradeColor}`}
@@ -223,10 +233,13 @@ export function GradesTable({ grades, coeficients }: GradesTableProps) {
           </div>
         ) : (
           <div className="p-6">
-            <GradesChart grades={grades} coefficients={coeficients}/>
+            <GradesChart grades={grades} coefficients={coeficients} />
           </div>
         )}
       </div>
+
+      {/* Popup */}
+      {showNotePopup && <NotesPopup period={selectedTrimester} selectedSubject={selectedSubject} onClose={() => setShowNotePopup(false)}></NotesPopup>}
     </div>
   );
 }
