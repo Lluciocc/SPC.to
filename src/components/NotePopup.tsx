@@ -31,7 +31,7 @@ export function NotesPopup({ onClose, selectedSubject, period }: NotesPopup) {
     }, 300); 
   };
 
-
+  console.log(selectedSubject)
 
   return (
     <div
@@ -78,7 +78,7 @@ export function NotesPopup({ onClose, selectedSubject, period }: NotesPopup) {
                   key={idx}
                   className="flex justify-between text-sm bg-gray-50 dark:bg-gray-700 p-2 rounded-lg"
                 >
-                  <span className={noteColor}>{note.valeur}</span>
+                  <span className={noteColor}>{note.valeur} {note.coef != 1? `(${note.coef})` : ""}</span>
                   <span>{note.type}</span>
                   <span className="text-black dark:text-white">{new Date(note.date).toLocaleDateString()}</span>
                 </li>
