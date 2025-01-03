@@ -13,6 +13,7 @@ export function Parameters({ user, onClose }: ParametersProps) {
 
   const clearLocalStorage = async () => {
     localStorage.clear();
+    
   };
 
   useEffect(() => {

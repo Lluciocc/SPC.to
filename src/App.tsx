@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { LoginForm } from './components/LoginForm';
 import { QcmForm } from './components/QcmForm';
@@ -13,8 +12,8 @@ import { InfoMessage } from './components/infoPopup';
 import { WarningMessage } from './components/warningPopup';
 import { getRandomPhrase } from './utils/motivate';
 
-import { Snow } from './context/SnowFall';  
-import { C_Light } from './context/light_bulb';
+import json_notes_data from './utils/json/notes_admin.json';
+import { console_message } from './utils/console';
 
 interface AuthUser extends User {
   token: string;
@@ -33,8 +32,12 @@ function App() {
   const [showPatchNotes, setShowPatchNotes] = useState(false);
   const [warning, setWarning] = useState<string>('');
   const [coefficients, setCoefficients] = useState<{ [key: string]: number }>({});
+  const [infos, setInfos] = useState<string>('');
 
   window.onload = async function TryToLog() {
+    console_message()
+    setInfos("Le site est en cours de développement. Merci de votre indulgence !");
+
     try {
       if (
         localStorage.getItem('token') !== null &&
@@ -43,7 +46,7 @@ function App() {
         localStorage.getItem('cn') !== null &&
         localStorage.getItem('cv') !== null
       ) {
-        setWarning("Trying to log you...")
+        setWarning("Trying to log you...");
         console.warn('not logged for the first time');
 
         const token_local = localStorage.getItem('token');
@@ -106,6 +109,47 @@ function App() {
       console.warn('logged for the first time');
 
       const token = await login(username, password);
+      if (token === "xxxxxxx") {
+        setInfos("Vous êtes connecté à une session administrateur. Toutes les informations affichées sont fictives et sont uniquement destinées à des fins de test.");
+        setShowQcm(false);
+        let account = {
+          id: 1111,
+          nom: "Admin",
+          prenom: "/",
+          sexe: "?",
+          email: "admin@example.com",
+          classe: "1-10",
+          photo: "xx",
+          etablissement: "SPC",
+          phone: "000-000-0000",
+          profile: "Admin Profile",
+        };
+
+        const authAdmin: AuthUser = {
+          ...account,
+          token,
+        };
+
+        const gradesData = json_notes_data.data;
+        const periodeActuelle = gradesData.periodes.find(
+          (periode) => periode.codePeriode === 'A001'
+        );
+
+        if (periodeActuelle && periodeActuelle.ensembleMatieres?.disciplines) {
+          const disciplines = periodeActuelle.ensembleMatieres.disciplines;
+
+          const coefficients = disciplines.reduce((acc, discipline) => {
+            acc[discipline.codeMatiere] = discipline.coef;
+            return acc;
+          }, {});
+
+          setCoefficients(coefficients);
+          setGrades(gradesData.notes);
+          setUser(authAdmin);
+          return;
+        }
+      }
+
       setTempToken(token);
 
       const questions = await getQCM(token);
@@ -184,26 +228,24 @@ function App() {
   return (
     <ThemeProvider>
       <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors">
-        <Snow/>
-        <C_Light></C_Light>
         <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
           {error && (
             <div className="mb-4 bg-red-50 dark:bg-red-900/50 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-200 px-4 py-3 rounded relative">
               {error}
             </div>
           )}
-          <InfoMessage info={"Le site est en cours de développement. Merci de votre indulgence !"} />
+          <InfoMessage info={infos} />
           <WarningMessage warning={warning}></WarningMessage>
 
           {user ? (
             <div className="space-y-6">
               <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg p-4 flex justify-between items-center">
-                  <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-                    Tableau de bord
-                  </h1>
-                  <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm md:text-base lg:text-base hidden md:block">
-                    {getRandomPhrase()}
-                  </p>
+                <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+                  Tableau de bord
+                </h1>
+                <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm md:text-base lg:text-base hidden md:block">
+                  {getRandomPhrase()}
+                </p>
                 <UserMenu
                   user={user}
                   onLogout={handleLogout}

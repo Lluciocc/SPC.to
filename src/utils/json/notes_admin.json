@@ -1,0 +1,2459 @@
+{
+    "code": 200,
+    "token": "62624d56-b67a-4e15-8fa8-fcd58123a0c4",
+    "host": "HTTP172",
+    "data": {
+        "foStat": "22121810019",
+        "periodes": [
+            {
+                "idPeriode": "A001",
+                "codePeriode": "A001",
+                "periode": "1er Trimestre",
+                "annuel": false,
+                "dateDebut": "2024-09-02",
+                "dateFin": "2024-11-23",
+                "examenBlanc": false,
+                "cloture": false,
+                "dateConseil": "2024-12-02",
+                "heureConseil": "17:00",
+                "salleConseil": "811",
+                "moyNbreJoursApresConseil": -1,
+                "ensembleMatieres": {
+                    "dateCalcul": "",
+                    "nomPP": "M. MILTGEN G.",
+                    "nomCE": "",
+                    "decisionDuConseil": "",
+                    "disciplines": [
+                        {
+                            "id": 4343,
+                            "codeMatiere": "FRANC",
+                            "codeSousMatiere": "",
+                            "discipline": "FRANCAIS",
+                            "coef": 5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 259,
+                                    "nom": "M. MILTGEN G."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4334,
+                            "codeMatiere": "AGL1",
+                            "codeSousMatiere": "",
+                            "discipline": "ANGLAIS",
+                            "coef": 2,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 221,
+                                    "nom": "M. LOISELEUX R."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5833,
+                            "codeMatiere": "ALL1",
+                            "codeSousMatiere": "",
+                            "discipline": "ALLEMAND LV1",
+                            "coef": 2,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 689,
+                                    "nom": "M. MENDES S."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4346,
+                            "codeMatiere": "HI-GE",
+                            "codeSousMatiere": "",
+                            "discipline": "HISTOIRE-GEOGRAPHIE",
+                            "coef": 2,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 415,
+                                    "nom": "Mme LOSZACH C."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4338,
+                            "codeMatiere": "EMC",
+                            "codeSousMatiere": "",
+                            "discipline": "ENS. MORAL & CIVIQUE",
+                            "coef": 0.5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 415,
+                                    "nom": "Mme LOSZACH C."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4344,
+                            "codeMatiere": "G-SCI",
+                            "codeSousMatiere": "",
+                            "discipline": "ENSEIGN.SCIENTIFIQUE",
+                            "coef": 1.5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 16,
+                                    "nom": "M. BAUDOT S."
+                                },
+                                {
+                                    "id": 656,
+                                    "nom": "M. LEONARD A."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5635,
+                            "codeMatiere": "G-SCI",
+                            "codeSousMatiere": "SVT",
+                            "discipline": "SVT",
+                            "coef": 0.75,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": true,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 656,
+                                    "nom": "M. LEONARD A."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5636,
+                            "codeMatiere": "G-SCI",
+                            "codeSousMatiere": "PH-CH",
+                            "discipline": "PHYSIQUE-CHIMIE",
+                            "coef": 0.75,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": true,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 16,
+                                    "nom": "M. BAUDOT S."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5837,
+                            "codeMatiere": "HLPHI",
+                            "codeSousMatiere": "",
+                            "discipline": "HUMAN.LITTER.PHILO.",
+                            "coef": 5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 259,
+                                    "nom": "M. MILTGEN G."
+                                },
+                                {
+                                    "id": 296,
+                                    "nom": "Mme PIERSON C."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5925,
+                            "codeMatiere": "HLPHI",
+                            "codeSousMatiere": "PHILO",
+                            "discipline": "Philosophie",
+                            "coef": 1,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": true,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 296,
+                                    "nom": "Mme PIERSON C."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5926,
+                            "codeMatiere": "HLPHI",
+                            "codeSousMatiere": "LITTERATUR",
+                            "discipline": "Littérature",
+                            "coef": 1,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": true,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 259,
+                                    "nom": "M. MILTGEN G."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5838,
+                            "codeMatiere": "MATSP",
+                            "codeSousMatiere": "",
+                            "discipline": "MATHS SPECIFIQUES",
+                            "coef": 1,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 714,
+                                    "nom": "Mme PONTVIANNE E."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5840,
+                            "codeMatiere": "SES",
+                            "codeSousMatiere": "",
+                            "discipline": "SC. ECONO.& SOCIALES",
+                            "coef": 5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 711,
+                                    "nom": "Mme HARCHOU C."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5911,
+                            "codeMatiere": "A-PLA",
+                            "codeSousMatiere": "",
+                            "discipline": "ARTS PLASTIQUES",
+                            "coef": 5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 403,
+                                    "nom": " LOREAD L."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5394,
+                            "codeMatiere": "MUSOP",
+                            "codeSousMatiere": "",
+                            "discipline": "MUSIQUE OPTION",
+                            "coef": 0.5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 138,
+                                    "nom": "M. GENDT D."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4339,
+                            "codeMatiere": "EPS",
+                            "codeSousMatiere": "",
+                            "discipline": "ED.PHYSIQUE & SPORT.",
+                            "coef": 1.5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 367,
+                                    "nom": "M. TRITZ G."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4336,
+                            "codeMatiere": "CATHO",
+                            "codeSousMatiere": "",
+                            "discipline": "ENS.RELIG.CATHOLIQUE",
+                            "coef": 0,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 249,
+                                    "nom": "M. MELLE J."
+                                }
+                            ]
+                        }
+                    ],
+                    "disciplinesSimulation": []
+                }
+            },
+            {
+                "idPeriode": "A002",
+                "codePeriode": "A002",
+                "periode": "2ème Trimestre",
+                "annuel": false,
+                "dateDebut": "2024-11-25",
+                "dateFin": "2025-03-08",
+                "examenBlanc": false,
+                "cloture": false,
+                "dateConseil": "2025-03-16",
+                "heureConseil": "17:00",
+                "moyNbreJoursApresConseil": -1,
+                "ensembleMatieres": {
+                    "dateCalcul": "",
+                    "nomPP": "M. MILTGEN G.",
+                    "nomCE": "",
+                    "decisionDuConseil": "",
+                    "disciplines": [
+                        {
+                            "id": 4343,
+                            "codeMatiere": "FRANC",
+                            "codeSousMatiere": "",
+                            "discipline": "FRANCAIS",
+                            "coef": 5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 259,
+                                    "nom": "M. MILTGEN G."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4334,
+                            "codeMatiere": "AGL1",
+                            "codeSousMatiere": "",
+                            "discipline": "ANGLAIS",
+                            "coef": 2,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 221,
+                                    "nom": "M. LOISELEUX R."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5833,
+                            "codeMatiere": "ALL1",
+                            "codeSousMatiere": "",
+                            "discipline": "ALLEMAND LV1",
+                            "coef": 2,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 689,
+                                    "nom": "M. MENDES S."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4346,
+                            "codeMatiere": "HI-GE",
+                            "codeSousMatiere": "",
+                            "discipline": "HISTOIRE-GEOGRAPHIE",
+                            "coef": 2,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 415,
+                                    "nom": "Mme LOSZACH C."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4338,
+                            "codeMatiere": "EMC",
+                            "codeSousMatiere": "",
+                            "discipline": "ENS. MORAL & CIVIQUE",
+                            "coef": 0.5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 415,
+                                    "nom": "Mme LOSZACH C."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4344,
+                            "codeMatiere": "G-SCI",
+                            "codeSousMatiere": "",
+                            "discipline": "ENSEIGN.SCIENTIFIQUE",
+                            "coef": 1.5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 16,
+                                    "nom": "M. BAUDOT S."
+                                },
+                                {
+                                    "id": 656,
+                                    "nom": "M. LEONARD A."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5635,
+                            "codeMatiere": "G-SCI",
+                            "codeSousMatiere": "SVT",
+                            "discipline": "SVT",
+                            "coef": 0.75,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": true,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 656,
+                                    "nom": "M. LEONARD A."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5636,
+                            "codeMatiere": "G-SCI",
+                            "codeSousMatiere": "PH-CH",
+                            "discipline": "PHYSIQUE-CHIMIE",
+                            "coef": 0.75,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": true,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 16,
+                                    "nom": "M. BAUDOT S."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5837,
+                            "codeMatiere": "HLPHI",
+                            "codeSousMatiere": "",
+                            "discipline": "HUMAN.LITTER.PHILO.",
+                            "coef": 5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 259,
+                                    "nom": "M. MILTGEN G."
+                                },
+                                {
+                                    "id": 296,
+                                    "nom": "Mme PIERSON C."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5925,
+                            "codeMatiere": "HLPHI",
+                            "codeSousMatiere": "PHILO",
+                            "discipline": "Philosophie",
+                            "coef": 1,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": true,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 296,
+                                    "nom": "Mme PIERSON C."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5926,
+                            "codeMatiere": "HLPHI",
+                            "codeSousMatiere": "LITTERATUR",
+                            "discipline": "Littérature",
+                            "coef": 1,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": true,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 259,
+                                    "nom": "M. MILTGEN G."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5838,
+                            "codeMatiere": "MATSP",
+                            "codeSousMatiere": "",
+                            "discipline": "MATHS SPECIFIQUES",
+                            "coef": 1,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 714,
+                                    "nom": "Mme PONTVIANNE E."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5840,
+                            "codeMatiere": "SES",
+                            "codeSousMatiere": "",
+                            "discipline": "SC. ECONO.& SOCIALES",
+                            "coef": 5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 711,
+                                    "nom": "Mme HARCHOU C."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5911,
+                            "codeMatiere": "A-PLA",
+                            "codeSousMatiere": "",
+                            "discipline": "ARTS PLASTIQUES",
+                            "coef": 5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 403,
+                                    "nom": " LOREAD L."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5394,
+                            "codeMatiere": "MUSOP",
+                            "codeSousMatiere": "",
+                            "discipline": "MUSIQUE OPTION",
+                            "coef": 0.5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 138,
+                                    "nom": "M. GENDT D."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4339,
+                            "codeMatiere": "EPS",
+                            "codeSousMatiere": "",
+                            "discipline": "ED.PHYSIQUE & SPORT.",
+                            "coef": 1.5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 367,
+                                    "nom": "M. TRITZ G."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4336,
+                            "codeMatiere": "CATHO",
+                            "codeSousMatiere": "",
+                            "discipline": "ENS.RELIG.CATHOLIQUE",
+                            "coef": 0,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 249,
+                                    "nom": "M. MELLE J."
+                                }
+                            ]
+                        }
+                    ],
+                    "disciplinesSimulation": []
+                }
+            },
+            {
+                "idPeriode": "A002X001",
+                "codePeriode": "A002X001",
+                "periode": "Examen Blanc n°1",
+                "annuel": false,
+                "dateDebut": "2024-11-25",
+                "dateFin": "2025-03-08",
+                "examenBlanc": true,
+                "cloture": false,
+                "moyNbreJoursApresConseil": -1,
+                "ensembleMatieres": {
+                    "dateCalcul": "",
+                    "nomPP": "M. MILTGEN G.",
+                    "nomCE": "",
+                    "decisionDuConseil": "",
+                    "disciplines": [
+                        {
+                            "id": 4343,
+                            "codeMatiere": "FRANC",
+                            "codeSousMatiere": "",
+                            "discipline": "FRANCAIS",
+                            "coef": 1,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 259,
+                                    "nom": "M. MILTGEN G."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5833,
+                            "codeMatiere": "ALL1",
+                            "codeSousMatiere": "",
+                            "discipline": "ALLEMAND LV1",
+                            "coef": 1,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 689,
+                                    "nom": "M. MENDES S."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5840,
+                            "codeMatiere": "SES",
+                            "codeSousMatiere": "",
+                            "discipline": "SC. ECONO.& SOCIALES",
+                            "coef": 1,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 711,
+                                    "nom": "Mme HARCHOU C."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5911,
+                            "codeMatiere": "A-PLA",
+                            "codeSousMatiere": "",
+                            "discipline": "ARTS PLASTIQUES",
+                            "coef": 5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 403,
+                                    "nom": " LOREAD L."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5837,
+                            "codeMatiere": "HLPHI",
+                            "codeSousMatiere": "",
+                            "discipline": "HUMAN.LITTER.PHILO.",
+                            "coef": 1,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 259,
+                                    "nom": "M. MILTGEN G."
+                                },
+                                {
+                                    "id": 296,
+                                    "nom": "Mme PIERSON C."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5925,
+                            "codeMatiere": "HLPHI",
+                            "codeSousMatiere": "PHILO",
+                            "discipline": "Philosophie",
+                            "coef": 1,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": true,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 296,
+                                    "nom": "Mme PIERSON C."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5926,
+                            "codeMatiere": "HLPHI",
+                            "codeSousMatiere": "LITTERATUR",
+                            "discipline": "Littérature",
+                            "coef": 1,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": true,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 259,
+                                    "nom": "M. MILTGEN G."
+                                }
+                            ]
+                        }
+                    ],
+                    "disciplinesSimulation": []
+                }
+            },
+            {
+                "idPeriode": "A003",
+                "codePeriode": "A003",
+                "periode": "3ème Trimestre",
+                "annuel": false,
+                "dateDebut": "2025-03-10",
+                "dateFin": "2025-07-06",
+                "examenBlanc": false,
+                "cloture": false,
+                "dateConseil": "2025-06-06",
+                "heureConseil": "17:00",
+                "moyNbreJoursApresConseil": -1,
+                "ensembleMatieres": {
+                    "dateCalcul": "",
+                    "nomPP": "M. MILTGEN G.",
+                    "nomCE": "",
+                    "decisionDuConseil": "",
+                    "disciplines": [
+                        {
+                            "id": 4343,
+                            "codeMatiere": "FRANC",
+                            "codeSousMatiere": "",
+                            "discipline": "FRANCAIS",
+                            "coef": 5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 259,
+                                    "nom": "M. MILTGEN G."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4334,
+                            "codeMatiere": "AGL1",
+                            "codeSousMatiere": "",
+                            "discipline": "ANGLAIS",
+                            "coef": 2,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 221,
+                                    "nom": "M. LOISELEUX R."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5833,
+                            "codeMatiere": "ALL1",
+                            "codeSousMatiere": "",
+                            "discipline": "ALLEMAND LV1",
+                            "coef": 2,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 689,
+                                    "nom": "M. MENDES S."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4346,
+                            "codeMatiere": "HI-GE",
+                            "codeSousMatiere": "",
+                            "discipline": "HISTOIRE-GEOGRAPHIE",
+                            "coef": 2,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 415,
+                                    "nom": "Mme LOSZACH C."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4338,
+                            "codeMatiere": "EMC",
+                            "codeSousMatiere": "",
+                            "discipline": "ENS. MORAL & CIVIQUE",
+                            "coef": 0.5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 415,
+                                    "nom": "Mme LOSZACH C."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4344,
+                            "codeMatiere": "G-SCI",
+                            "codeSousMatiere": "",
+                            "discipline": "ENSEIGN.SCIENTIFIQUE",
+                            "coef": 1.5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 16,
+                                    "nom": "M. BAUDOT S."
+                                },
+                                {
+                                    "id": 656,
+                                    "nom": "M. LEONARD A."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5635,
+                            "codeMatiere": "G-SCI",
+                            "codeSousMatiere": "SVT",
+                            "discipline": "SVT",
+                            "coef": 0.75,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": true,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 656,
+                                    "nom": "M. LEONARD A."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5636,
+                            "codeMatiere": "G-SCI",
+                            "codeSousMatiere": "PH-CH",
+                            "discipline": "PHYSIQUE-CHIMIE",
+                            "coef": 0.75,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": true,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 16,
+                                    "nom": "M. BAUDOT S."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5837,
+                            "codeMatiere": "HLPHI",
+                            "codeSousMatiere": "",
+                            "discipline": "HUMAN.LITTER.PHILO.",
+                            "coef": 5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 259,
+                                    "nom": "M. MILTGEN G."
+                                },
+                                {
+                                    "id": 296,
+                                    "nom": "Mme PIERSON C."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5925,
+                            "codeMatiere": "HLPHI",
+                            "codeSousMatiere": "PHILO",
+                            "discipline": "Philosophie",
+                            "coef": 1,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": true,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 296,
+                                    "nom": "Mme PIERSON C."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5926,
+                            "codeMatiere": "HLPHI",
+                            "codeSousMatiere": "LITTERATUR",
+                            "discipline": "Littérature",
+                            "coef": 1,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": true,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 259,
+                                    "nom": "M. MILTGEN G."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5838,
+                            "codeMatiere": "MATSP",
+                            "codeSousMatiere": "",
+                            "discipline": "MATHS SPECIFIQUES",
+                            "coef": 1,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 714,
+                                    "nom": "Mme PONTVIANNE E."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5840,
+                            "codeMatiere": "SES",
+                            "codeSousMatiere": "",
+                            "discipline": "SC. ECONO.& SOCIALES",
+                            "coef": 5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 711,
+                                    "nom": "Mme HARCHOU C."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5911,
+                            "codeMatiere": "A-PLA",
+                            "codeSousMatiere": "",
+                            "discipline": "ARTS PLASTIQUES",
+                            "coef": 5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 403,
+                                    "nom": " LOREAD L."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5394,
+                            "codeMatiere": "MUSOP",
+                            "codeSousMatiere": "",
+                            "discipline": "MUSIQUE OPTION",
+                            "coef": 0.5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 138,
+                                    "nom": "M. GENDT D."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4339,
+                            "codeMatiere": "EPS",
+                            "codeSousMatiere": "",
+                            "discipline": "ED.PHYSIQUE & SPORT.",
+                            "coef": 1.5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 367,
+                                    "nom": "M. TRITZ G."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4336,
+                            "codeMatiere": "CATHO",
+                            "codeSousMatiere": "",
+                            "discipline": "ENS.RELIG.CATHOLIQUE",
+                            "coef": 0,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 249,
+                                    "nom": "M. MELLE J."
+                                }
+                            ]
+                        }
+                    ],
+                    "disciplinesSimulation": []
+                }
+            },
+            {
+                "idPeriode": "A003X001",
+                "codePeriode": "A003X001",
+                "periode": "Examen Blanc n°2",
+                "annuel": false,
+                "dateDebut": "2025-03-10",
+                "dateFin": "2025-07-06",
+                "examenBlanc": true,
+                "cloture": false,
+                "moyNbreJoursApresConseil": -1,
+                "ensembleMatieres": {
+                    "dateCalcul": "",
+                    "nomPP": "M. MILTGEN G.",
+                    "nomCE": "",
+                    "decisionDuConseil": "",
+                    "disciplines": [
+                        {
+                            "id": 4343,
+                            "codeMatiere": "FRANC",
+                            "codeSousMatiere": "",
+                            "discipline": "FRANCAIS",
+                            "coef": 1,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 259,
+                                    "nom": "M. MILTGEN G."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5833,
+                            "codeMatiere": "ALL1",
+                            "codeSousMatiere": "",
+                            "discipline": "ALLEMAND LV1",
+                            "coef": 1,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 689,
+                                    "nom": "M. MENDES S."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5840,
+                            "codeMatiere": "SES",
+                            "codeSousMatiere": "",
+                            "discipline": "SC. ECONO.& SOCIALES",
+                            "coef": 1,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 711,
+                                    "nom": "Mme HARCHOU C."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5911,
+                            "codeMatiere": "A-PLA",
+                            "codeSousMatiere": "",
+                            "discipline": "ARTS PLASTIQUES",
+                            "coef": 5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 403,
+                                    "nom": " LOREAD L."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5837,
+                            "codeMatiere": "HLPHI",
+                            "codeSousMatiere": "",
+                            "discipline": "HUMAN.LITTER.PHILO.",
+                            "coef": 1,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 259,
+                                    "nom": "M. MILTGEN G."
+                                },
+                                {
+                                    "id": 296,
+                                    "nom": "Mme PIERSON C."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5925,
+                            "codeMatiere": "HLPHI",
+                            "codeSousMatiere": "PHILO",
+                            "discipline": "Philosophie",
+                            "coef": 1,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": true,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 296,
+                                    "nom": "Mme PIERSON C."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5926,
+                            "codeMatiere": "HLPHI",
+                            "codeSousMatiere": "LITTERATUR",
+                            "discipline": "Littérature",
+                            "coef": 1,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": true,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 259,
+                                    "nom": "M. MILTGEN G."
+                                }
+                            ]
+                        }
+                    ],
+                    "disciplinesSimulation": []
+                }
+            },
+            {
+                "idPeriode": "A999Z",
+                "codePeriode": "A999Z",
+                "periode": "Année",
+                "annuel": true,
+                "dateDebut": "2024-09-02",
+                "dateFin": "2025-07-06",
+                "examenBlanc": false,
+                "cloture": false,
+                "moyNbreJoursApresConseil": -1,
+                "ensembleMatieres": {
+                    "dateCalcul": "",
+                    "nomPP": "M. MILTGEN G.",
+                    "nomCE": "",
+                    "decisionDuConseil": "",
+                    "disciplines": [
+                        {
+                            "id": 4343,
+                            "codeMatiere": "FRANC",
+                            "codeSousMatiere": "",
+                            "discipline": "FRANCAIS",
+                            "coef": 5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 259,
+                                    "nom": "M. MILTGEN G."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4334,
+                            "codeMatiere": "AGL1",
+                            "codeSousMatiere": "",
+                            "discipline": "ANGLAIS",
+                            "coef": 2,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 221,
+                                    "nom": "M. LOISELEUX R."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5833,
+                            "codeMatiere": "ALL1",
+                            "codeSousMatiere": "",
+                            "discipline": "ALLEMAND LV1",
+                            "coef": 2,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 689,
+                                    "nom": "M. MENDES S."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4346,
+                            "codeMatiere": "HI-GE",
+                            "codeSousMatiere": "",
+                            "discipline": "HISTOIRE-GEOGRAPHIE",
+                            "coef": 2,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 415,
+                                    "nom": "Mme LOSZACH C."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4338,
+                            "codeMatiere": "EMC",
+                            "codeSousMatiere": "",
+                            "discipline": "ENS. MORAL & CIVIQUE",
+                            "coef": 0.5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 415,
+                                    "nom": "Mme LOSZACH C."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4344,
+                            "codeMatiere": "G-SCI",
+                            "codeSousMatiere": "",
+                            "discipline": "ENSEIGN.SCIENTIFIQUE",
+                            "coef": 1.5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 16,
+                                    "nom": "M. BAUDOT S."
+                                },
+                                {
+                                    "id": 656,
+                                    "nom": "M. LEONARD A."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5635,
+                            "codeMatiere": "G-SCI",
+                            "codeSousMatiere": "SVT",
+                            "discipline": "SVT",
+                            "coef": 0.75,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": true,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 656,
+                                    "nom": "M. LEONARD A."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5636,
+                            "codeMatiere": "G-SCI",
+                            "codeSousMatiere": "PH-CH",
+                            "discipline": "PHYSIQUE-CHIMIE",
+                            "coef": 0.75,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": true,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 16,
+                                    "nom": "M. BAUDOT S."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5837,
+                            "codeMatiere": "HLPHI",
+                            "codeSousMatiere": "",
+                            "discipline": "HUMAN.LITTER.PHILO.",
+                            "coef": 5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 259,
+                                    "nom": "M. MILTGEN G."
+                                },
+                                {
+                                    "id": 296,
+                                    "nom": "Mme PIERSON C."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5925,
+                            "codeMatiere": "HLPHI",
+                            "codeSousMatiere": "PHILO",
+                            "discipline": "Philosophie",
+                            "coef": 1,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": true,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 296,
+                                    "nom": "Mme PIERSON C."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5926,
+                            "codeMatiere": "HLPHI",
+                            "codeSousMatiere": "LITTERATUR",
+                            "discipline": "Littérature",
+                            "coef": 1,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": true,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 259,
+                                    "nom": "M. MILTGEN G."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5838,
+                            "codeMatiere": "MATSP",
+                            "codeSousMatiere": "",
+                            "discipline": "MATHS SPECIFIQUES",
+                            "coef": 1,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 714,
+                                    "nom": "Mme PONTVIANNE E."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5840,
+                            "codeMatiere": "SES",
+                            "codeSousMatiere": "",
+                            "discipline": "SC. ECONO.& SOCIALES",
+                            "coef": 5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 711,
+                                    "nom": "Mme HARCHOU C."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5911,
+                            "codeMatiere": "A-PLA",
+                            "codeSousMatiere": "",
+                            "discipline": "ARTS PLASTIQUES",
+                            "coef": 5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 403,
+                                    "nom": " LOREAD L."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5394,
+                            "codeMatiere": "MUSOP",
+                            "codeSousMatiere": "",
+                            "discipline": "MUSIQUE OPTION",
+                            "coef": 0.5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 138,
+                                    "nom": "M. GENDT D."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4339,
+                            "codeMatiere": "EPS",
+                            "codeSousMatiere": "",
+                            "discipline": "ED.PHYSIQUE & SPORT.",
+                            "coef": 1.5,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 367,
+                                    "nom": "M. TRITZ G."
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4336,
+                            "codeMatiere": "CATHO",
+                            "codeSousMatiere": "",
+                            "discipline": "ENS.RELIG.CATHOLIQUE",
+                            "coef": 0,
+                            "effectif": 0,
+                            "rang": 0,
+                            "groupeMatiere": false,
+                            "idGroupeMatiere": 0,
+                            "option": 0,
+                            "sousMatiere": false,
+                            "saisieAppreciationSSMat": false,
+                            "professeurs": [
+                                {
+                                    "id": 249,
+                                    "nom": "M. MELLE J."
+                                }
+                            ]
+                        }
+                    ],
+                    "disciplinesSimulation": []
+                }
+            }
+        ],
+        "notes": [
+            {
+                "id": 8388990,
+                "devoir": "Exercices",
+                "codePeriode": "A001",
+                "codeMatiere": "HI-GE",
+                "libelleMatiere": "HISTOIRE-GEOGRAPHIE",
+                "codeSousMatiere": "",
+                "typeDevoir": "Devoir sur table",
+                "enLettre": false,
+                "commentaire": "",
+                "uncSujet": "",
+                "uncCorrige": "",
+                "date": "2024-09-13",
+                "dateSaisie": "2024-11-11",
+                "coef": "0.5",
+                "noteSur": "20",
+                "valeur": "14",
+                "valeurisee": false,
+                "nonSignificatif": false,
+                "maxClasse": "15.00",
+                "elementsProgramme": []
+            },
+            {
+                "id": 8389177,
+                "devoir": "Travail de groupe 1",
+                "codePeriode": "A001",
+                "codeMatiere": "MATSP",
+                "libelleMatiere": "MATHS SPECIFIQUES",
+                "codeSousMatiere": "",
+                "typeDevoir": "Devoir sur table",
+                "enLettre": true,
+                "commentaire": "",
+                "uncSujet": "",
+                "uncCorrige": "",
+                "date": "2024-09-23",
+                "dateSaisie": "2024-09-25",
+                "coef": "1",
+                "noteSur": "20",
+                "valeur": "Abs ",
+                "valeurisee": false,
+                "nonSignificatif": false,
+                "maxClasse": "",
+                "elementsProgramme": []
+            },
+            {
+                "id": 8389114,
+                "devoir": "Exposé : La socialisation secondaire",
+                "codePeriode": "A001",
+                "codeMatiere": "SES",
+                "libelleMatiere": "SC. ECONO.& SOCIALES",
+                "codeSousMatiere": "",
+                "typeDevoir": "",
+                "enLettre": false,
+                "commentaire": "",
+                "uncSujet": "",
+                "uncCorrige": "",
+                "date": "2024-09-24",
+                "dateSaisie": "2024-09-24",
+                "coef": "1",
+                "noteSur": "10",
+                "valeur": "9",
+                "valeurisee": false,
+                "nonSignificatif": false,
+                "maxClasse": "9.00",
+                "elementsProgramme": []
+            },
+            {
+                "id": 8389263,
+                "devoir": "interrogation Chapitre 1",
+                "codePeriode": "A001",
+                "codeMatiere": "SES",
+                "libelleMatiere": "SC. ECONO.& SOCIALES",
+                "codeSousMatiere": "",
+                "typeDevoir": "",
+                "enLettre": false,
+                "commentaire": "",
+                "uncSujet": "",
+                "uncCorrige": "",
+                "date": "2024-09-26",
+                "dateSaisie": "2024-09-26",
+                "coef": "1",
+                "noteSur": "20",
+                "valeur": "15",
+                "valeurisee": false,
+                "nonSignificatif": false,
+                "maxClasse": "18.50",
+                "elementsProgramme": []
+            },
+            {
+                "id": 8389460,
+                "devoir": "Devoir n.1",
+                "codePeriode": "A001",
+                "codeMatiere": "HLPHI",
+                "libelleMatiere": "Littérature",
+                "codeSousMatiere": "LITTERATUR",
+                "typeDevoir": "Devoir sur table",
+                "enLettre": false,
+                "commentaire": "",
+                "uncSujet": "",
+                "uncCorrige": "",
+                "date": "2024-09-30",
+                "dateSaisie": "2024-09-30",
+                "coef": "1",
+                "noteSur": "20",
+                "valeur": "18",
+                "valeurisee": false,
+                "nonSignificatif": false,
+                "maxClasse": "19.00",
+                "elementsProgramme": []
+            },
+            {
+                "id": 8389738,
+                "devoir": "Connaissances H1",
+                "codePeriode": "A001",
+                "codeMatiere": "HI-GE",
+                "libelleMatiere": "HISTOIRE-GEOGRAPHIE",
+                "codeSousMatiere": "",
+                "typeDevoir": "Devoir sur table",
+                "enLettre": false,
+                "commentaire": "",
+                "uncSujet": "",
+                "uncCorrige": "",
+                "date": "2024-10-04",
+                "dateSaisie": "2024-11-11",
+                "coef": "0.5",
+                "noteSur": "20",
+                "valeur": "19",
+                "valeurisee": false,
+                "nonSignificatif": false,
+                "maxClasse": "20.00",
+                "elementsProgramme": []
+            },
+            {
+                "id": 8391024,
+                "devoir": "verbes forts",
+                "codePeriode": "A001",
+                "codeMatiere": "ALL1",
+                "libelleMatiere": "ALLEMAND LV1",
+                "codeSousMatiere": "",
+                "typeDevoir": "Devoir Maison",
+                "enLettre": false,
+                "commentaire": "",
+                "uncSujet": "",
+                "uncCorrige": "",
+                "date": "2024-10-04",
+                "dateSaisie": "2024-11-06",
+                "coef": "1",
+                "noteSur": "10",
+                "valeur": "8",
+                "valeurisee": false,
+                "nonSignificatif": false,
+                "maxClasse": "9.50",
+                "elementsProgramme": []
+            },
+            {
+                "id": 8389810,
+                "devoir": "SVT N1",
+                "codePeriode": "A001",
+                "codeMatiere": "G-SCI",
+                "libelleMatiere": "SVT",
+                "codeSousMatiere": "SVT",
+                "typeDevoir": "",
+                "enLettre": false,
+                "commentaire": "",
+                "uncSujet": "",
+                "uncCorrige": "",
+                "date": "2024-10-07",
+                "dateSaisie": "2024-11-18",
+                "coef": "0.5",
+                "noteSur": "20",
+                "valeur": "18",
+                "valeurisee": false,
+                "nonSignificatif": false,
+                "maxClasse": "20.00",
+                "elementsProgramme": []
+            },
+            {
+                "id": 8389902,
+                "devoir": "Devoir n.2",
+                "codePeriode": "A001",
+                "codeMatiere": "FRANC",
+                "libelleMatiere": "FRANCAIS",
+                "codeSousMatiere": "",
+                "typeDevoir": "Devoir sur table",
+                "enLettre": false,
+                "commentaire": "",
+                "uncSujet": "",
+                "uncCorrige": "",
+                "date": "2024-10-08",
+                "dateSaisie": "2024-10-08",
+                "coef": "2",
+                "noteSur": "20",
+                "valeur": "18",
+                "valeurisee": false,
+                "nonSignificatif": false,
+                "maxClasse": "18.50",
+                "elementsProgramme": []
+            },
+            {
+                "id": 8389941,
+                "devoir": "devoir 1 ",
+                "codePeriode": "A001",
+                "codeMatiere": "G-SCI",
+                "libelleMatiere": "PHYSIQUE-CHIMIE",
+                "codeSousMatiere": "PH-CH",
+                "typeDevoir": "",
+                "enLettre": false,
+                "commentaire": "",
+                "uncSujet": "",
+                "uncCorrige": "",
+                "date": "2024-10-09",
+                "dateSaisie": "2024-10-09",
+                "coef": "1",
+                "noteSur": "20",
+                "valeur": "17,5",
+                "valeurisee": false,
+                "nonSignificatif": false,
+                "maxClasse": "19.50",
+                "elementsProgramme": []
+            },
+            {
+                "id": 8390005,
+                "devoir": "Évaluation Chapitre 1",
+                "codePeriode": "A001",
+                "codeMatiere": "MATSP",
+                "libelleMatiere": "MATHS SPECIFIQUES",
+                "codeSousMatiere": "",
+                "typeDevoir": "Devoir sur table",
+                "enLettre": false,
+                "commentaire": "",
+                "uncSujet": "",
+                "uncCorrige": "",
+                "date": "2024-10-09",
+                "dateSaisie": "2024-10-09",
+                "coef": "2",
+                "noteSur": "20",
+                "valeur": "18",
+                "valeurisee": false,
+                "nonSignificatif": false,
+                "maxClasse": "19.00",
+                "elementsProgramme": []
+            },
+            {
+                "id": 8390461,
+                "devoir": "Interrogation écrite cours d'introduction",
+                "codePeriode": "A001",
+                "codeMatiere": "HLPHI",
+                "libelleMatiere": "Philosophie",
+                "codeSousMatiere": "PHILO",
+                "typeDevoir": "Devoir sur table",
+                "enLettre": false,
+                "commentaire": "",
+                "uncSujet": "",
+                "uncCorrige": "",
+                "date": "2024-10-10",
+                "dateSaisie": "2024-10-17",
+                "coef": "1",
+                "noteSur": "20",
+                "valeur": "15",
+                "valeurisee": false,
+                "nonSignificatif": false,
+                "maxClasse": "20.00",
+                "elementsProgramme": []
+            },
+            {
+                "id": 8391099,
+                "devoir": "Compréhension orale biopics",
+                "codePeriode": "A001",
+                "codeMatiere": "AGL1",
+                "libelleMatiere": "ANGLAIS",
+                "codeSousMatiere": "",
+                "typeDevoir": "Devoir sur table",
+                "enLettre": false,
+                "commentaire": "",
+                "uncSujet": "",
+                "uncCorrige": "",
+                "date": "2024-10-11",
+                "dateSaisie": "2024-11-07",
+                "coef": "2",
+                "noteSur": "20",
+                "valeur": "12",
+                "valeurisee": false,
+                "nonSignificatif": false,
+                "maxClasse": "20.00",
+                "elementsProgramme": []
+            },
+            {
+                "id": 8390779,
+                "devoir": "Exercices",
+                "codePeriode": "A001",
+                "codeMatiere": "HI-GE",
+                "libelleMatiere": "HISTOIRE-GEOGRAPHIE",
+                "codeSousMatiere": "",
+                "typeDevoir": "Devoir sur table",
+                "enLettre": false,
+                "commentaire": "",
+                "uncSujet": "",
+                "uncCorrige": "",
+                "date": "2024-10-11",
+                "dateSaisie": "2024-10-30",
+                "coef": "0.5",
+                "noteSur": "20",
+                "valeur": "11",
+                "valeurisee": false,
+                "nonSignificatif": false,
+                "maxClasse": "17.00",
+                "elementsProgramme": []
+            },
+            {
+                "id": 8390498,
+                "devoir": "Devoir n.1",
+                "codePeriode": "A001",
+                "codeMatiere": "FRANC",
+                "libelleMatiere": "FRANCAIS",
+                "codeSousMatiere": "",
+                "typeDevoir": "Devoir Maison",
+                "enLettre": false,
+                "commentaire": "",
+                "uncSujet": "",
+                "uncCorrige": "",
+                "date": "2024-10-17",
+                "dateSaisie": "2024-10-17",
+                "coef": "1",
+                "noteSur": "20",
+                "valeur": "17",
+                "valeurisee": false,
+                "nonSignificatif": false,
+                "maxClasse": "20.00",
+                "elementsProgramme": []
+            },
+            {
+                "id": 8390499,
+                "devoir": "Devoir n.2",
+                "codePeriode": "A001",
+                "codeMatiere": "HLPHI",
+                "libelleMatiere": "Littérature",
+                "codeSousMatiere": "LITTERATUR",
+                "typeDevoir": "Devoir sur table",
+                "enLettre": false,
+                "commentaire": "",
+                "uncSujet": "",
+                "uncCorrige": "",
+                "date": "2024-10-17",
+                "dateSaisie": "2024-10-17",
+                "coef": "2",
+                "noteSur": "20",
+                "valeur": "15,5",
+                "valeurisee": false,
+                "nonSignificatif": false,
+                "maxClasse": "18.00",
+                "elementsProgramme": []
+            },
+            {
+                "id": 8390950,
+                "devoir": "Test de connaissances biopics",
+                "codePeriode": "A001",
+                "codeMatiere": "AGL1",
+                "libelleMatiere": "ANGLAIS",
+                "codeSousMatiere": "",
+                "typeDevoir": "Devoir sur table",
+                "enLettre": false,
+                "commentaire": "",
+                "uncSujet": "",
+                "uncCorrige": "",
+                "date": "2024-10-17",
+                "dateSaisie": "2024-11-04",
+                "coef": "1",
+                "noteSur": "20",
+                "valeur": "14,5",
+                "valeurisee": false,
+                "nonSignificatif": false,
+                "maxClasse": "15.50",
+                "elementsProgramme": []
+            },
+            {
+                "id": 8390600,
+                "devoir": "Contrôle n.1",
+                "codePeriode": "A001",
+                "codeMatiere": "FRANC",
+                "libelleMatiere": "FRANCAIS",
+                "codeSousMatiere": "",
+                "typeDevoir": "Devoir sur table",
+                "enLettre": false,
+                "commentaire": "",
+                "uncSujet": "",
+                "uncCorrige": "",
+                "date": "2024-10-18",
+                "dateSaisie": "2024-10-18",
+                "coef": "3",
+                "noteSur": "20",
+                "valeur": "16",
+                "valeurisee": false,
+                "nonSignificatif": false,
+                "maxClasse": "17.00",
+                "elementsProgramme": []
+            },
+            {
+                "id": 8390954,
+                "devoir": "Interrogation - le marché",
+                "codePeriode": "A001",
+                "codeMatiere": "SES",
+                "libelleMatiere": "SC. ECONO.& SOCIALES",
+                "codeSousMatiere": "",
+                "typeDevoir": "",
+                "enLettre": false,
+                "commentaire": "",
+                "uncSujet": "",
+                "uncCorrige": "",
+                "date": "2024-11-05",
+                "dateSaisie": "2024-11-05",
+                "coef": "1",
+                "noteSur": "20",
+                "valeur": "13,5",
+                "valeurisee": false,
+                "nonSignificatif": false,
+                "maxClasse": "19.00",
+                "elementsProgramme": []
+            },
+            {
+                "id": 8391069,
+                "devoir": "Tâche finale EE biopics",
+                "codePeriode": "A001",
+                "codeMatiere": "AGL1",
+                "libelleMatiere": "ANGLAIS",
+                "codeSousMatiere": "",
+                "typeDevoir": "Devoir sur table",
+                "enLettre": false,
+                "commentaire": "",
+                "uncSujet": "",
+                "uncCorrige": "",
+                "date": "2024-11-06",
+                "dateSaisie": "2024-11-06",
+                "coef": "2",
+                "noteSur": "20",
+                "valeur": "14",
+                "valeurisee": false,
+                "nonSignificatif": false,
+                "maxClasse": "20.00",
+                "elementsProgramme": []
+            },
+            {
+                "id": 8391033,
+                "devoir": "Test de chant",
+                "codePeriode": "A001",
+                "codeMatiere": "MUSOP",
+                "libelleMatiere": "MUSIQUE OPTION",
+                "codeSousMatiere": "",
+                "typeDevoir": "",
+                "enLettre": false,
+                "commentaire": "",
+                "uncSujet": "",
+                "uncCorrige": "",
+                "date": "2024-11-06",
+                "dateSaisie": "2024-11-06",
+                "coef": "1",
+                "noteSur": "20",
+                "valeur": "18",
+                "valeurisee": false,
+                "nonSignificatif": false,
+                "maxClasse": "19.00",
+                "elementsProgramme": []
+            },
+            {
+                "id": 8391126,
+                "devoir": "Rédaction suite exercice en classe",
+                "codePeriode": "A001",
+                "codeMatiere": "HLPHI",
+                "libelleMatiere": "Philosophie",
+                "codeSousMatiere": "PHILO",
+                "typeDevoir": "Devoir Maison",
+                "enLettre": false,
+                "commentaire": "",
+                "uncSujet": "",
+                "uncCorrige": "",
+                "date": "2024-11-07",
+                "dateSaisie": "2024-11-07",
+                "coef": "1",
+                "noteSur": "20",
+                "valeur": "18",
+                "valeurisee": false,
+                "nonSignificatif": true,
+                "maxClasse": "18.00",
+                "elementsProgramme": []
+            },
+            {
+                "id": 8391282,
+                "devoir": "Connaissances",
+                "codePeriode": "A001",
+                "codeMatiere": "HI-GE",
+                "libelleMatiere": "HISTOIRE-GEOGRAPHIE",
+                "codeSousMatiere": "",
+                "typeDevoir": "Devoir sur table",
+                "enLettre": false,
+                "commentaire": "",
+                "uncSujet": "",
+                "uncCorrige": "",
+                "date": "2024-11-08",
+                "dateSaisie": "2024-11-11",
+                "coef": "0.5",
+                "noteSur": "20",
+                "valeur": "15",
+                "valeurisee": false,
+                "nonSignificatif": false,
+                "maxClasse": "17.00",
+                "elementsProgramme": []
+            },
+            {
+                "id": 8391169,
+                "devoir": "Interrogation n.1",
+                "codePeriode": "A001",
+                "codeMatiere": "FRANC",
+                "libelleMatiere": "FRANCAIS",
+                "codeSousMatiere": "",
+                "typeDevoir": "Devoir sur table",
+                "enLettre": false,
+                "commentaire": "",
+                "uncSujet": "",
+                "uncCorrige": "",
+                "date": "2024-11-08",
+                "dateSaisie": "2024-11-18",
+                "coef": "1.5",
+                "noteSur": "20",
+                "valeur": "10",
+                "valeurisee": false,
+                "nonSignificatif": false,
+                "maxClasse": "20.00",
+                "elementsProgramme": []
+            },
+            {
+                "id": 8391944,
+                "devoir": "devoir 2",
+                "codePeriode": "A001",
+                "codeMatiere": "G-SCI",
+                "libelleMatiere": "PHYSIQUE-CHIMIE",
+                "codeSousMatiere": "PH-CH",
+                "typeDevoir": "",
+                "enLettre": false,
+                "commentaire": "",
+                "uncSujet": "",
+                "uncCorrige": "",
+                "date": "2024-11-18",
+                "dateSaisie": "2024-11-18",
+                "coef": "1",
+                "noteSur": "20",
+                "valeur": "17,5",
+                "valeurisee": false,
+                "nonSignificatif": false,
+                "maxClasse": "17.50",
+                "elementsProgramme": []
+            },
+            {
+                "id": 8391825,
+                "devoir": "SVT N2",
+                "codePeriode": "A001",
+                "codeMatiere": "G-SCI",
+                "libelleMatiere": "SVT",
+                "codeSousMatiere": "SVT",
+                "typeDevoir": "",
+                "enLettre": false,
+                "commentaire": "",
+                "uncSujet": "",
+                "uncCorrige": "",
+                "date": "2024-11-18",
+                "dateSaisie": "2024-11-18",
+                "coef": "0.5",
+                "noteSur": "10",
+                "valeur": "7",
+                "valeurisee": false,
+                "nonSignificatif": false,
+                "maxClasse": "10.00",
+                "elementsProgramme": []
+            },
+            {
+                "id": 8391999,
+                "devoir": "Évaluation Devoir Maison n°1",
+                "codePeriode": "A001",
+                "codeMatiere": "MATSP",
+                "libelleMatiere": "MATHS SPECIFIQUES",
+                "codeSousMatiere": "",
+                "typeDevoir": "Devoir Maison",
+                "enLettre": false,
+                "commentaire": "",
+                "uncSujet": "",
+                "uncCorrige": "",
+                "date": "2024-11-18",
+                "dateSaisie": "2024-11-19",
+                "coef": "0.5",
+                "noteSur": "10",
+                "valeur": "10",
+                "valeurisee": false,
+                "nonSignificatif": false,
+                "maxClasse": "10.00",
+                "elementsProgramme": []
+            }
+        ],
+        "parametrage": {
+            "couleurEval1": "#FF0000",
+            "couleurEval2": "#FFC000",
+            "couleurEval3": "#0070C0",
+            "couleurEval4": "#00B050",
+            "libelleEval1": "Tm9uIGF0dGVpbnRz",
+            "libelleEval2": "UGFydGllbGxlbWVudCBhdHRlaW50cw==",
+            "libelleEval3": "QXR0ZWludHM=",
+            "libelleEval4": "RMOpcGFzc8Opcw==",
+            "affichageMoyenne": false,
+            "affichageMoyenneDevoir": true,
+            "affichagePositionMatiere": false,
+            "affichageOngletCompetence": 0,
+            "affichageNote": true,
+            "affichageCompetence": false,
+            "affichageEvaluationsComposantes": false,
+            "affichageGraphiquesComposantes": true,
+            "modeCalculGraphiquesComposantes": "eval",
+            "affichageCompNum": false,
+            "libelleEvalCompNum1": "Tm9uIGF0dGVpbnQ=",
+            "libelleEvalCompNum2": "UGFydGllbGxlbWVudCBhdHRlaW50",
+            "libelleEvalCompNum3": "QXR0ZWludA==",
+            "affichageAppreciation": false,
+            "coefficientNote": true,
+            "colonneCoefficientMatiere": false,
+            "noteGrasSousMoyenne": true,
+            "noteGrasAudessusMoyenne": false,
+            "libelleDevoir": true,
+            "dateDevoir": true,
+            "typeDevoir": true,
+            "noteUniquementPeriodeCloture": false,
+            "notePeriodeReleve": false,
+            "notePeriodeAnnuelle": false,
+            "notePeriodeHorsP": false,
+            "libellesAppreciations": [
+                "Appréciation générale"
+            ],
+            "appreciationsParametrage": [
+                {
+                    "code": "APP1",
+                    "id": 1,
+                    "nbMaxCaractere": 160,
+                    "libelle": "Appréciation générale"
+                }
+            ]
+        }
+    }
+}

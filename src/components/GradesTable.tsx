@@ -46,6 +46,8 @@ const calcGeneralAverage = (
   let totalWeighted = 0;
   let totalCoef = 0;
 
+  console.log(coefficients)
+
   subjects.forEach((subject) => {
     const coef = coefficients[subject.codeMatiere] || 0; // Utiliser codeMatiere ici
     const average = calcAverage(subject.notes, scale);
@@ -54,6 +56,7 @@ const calcGeneralAverage = (
       totalWeighted += parseFloat(average) * coef;
       totalCoef += coef;
     }
+
   });
 
   return totalCoef === 0 ? "N/A" : (totalWeighted / totalCoef).toFixed(2);

@@ -71,6 +71,7 @@ export function DevNotes({ onClose }: DevNotesProps) {
             </h3>
             <p className="text-gray-700 dark:text-gray-300">
               SPC.to utilise des cookies (localStorage) afin de permettre une expérience optimale. Vous pouvez les supprimer à tout moment dans l'onglet paramètres.
+              Veuillez aussi noter que le notes peuvent avoir un decalage (à 0.1 pres) par rapport aux autres sites de calcul de moyenne, merci de votre indulgence
             </p>
           </section>
 

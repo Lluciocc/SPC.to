@@ -29,3 +29,16 @@ export function InfoMessage({ info }: { info: string }) {
     </div>
   );
 }
+
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes marquee {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+`;
+document.head.appendChild(style);
