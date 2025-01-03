@@ -4,6 +4,7 @@ import { Calculator, ChevronDown } from "lucide-react";
 import type { Grade } from "../types/auth";
 import { GradesChart } from "./GradesChart";
 import { NotesPopup } from "./NotePopup";
+import { NotesInfos } from './NotesInfos';
 
 // Helper functions
 const parseGrade = (value: string): number =>
@@ -46,8 +47,6 @@ const calcGeneralAverage = (
   let totalWeighted = 0;
   let totalCoef = 0;
 
-  console.log(coefficients)
-
   subjects.forEach((subject) => {
     const coef = coefficients[subject.codeMatiere] || 0; // Utiliser codeMatiere ici
     const average = calcAverage(subject.notes, scale);
@@ -78,7 +77,6 @@ export function GradesTable({ grades, coeficients }: GradesTableProps) {
   const [showChart, setShowChart] = useState<boolean>(false);
   const [selectedSubject, setSelectedSubject] = useState<string>("");
   const [showNotePopup, setShowNotePopup] = useState(false);
-  const [currentPeriod, setCurrentPeriod] = useState<string>("");
 
   const subjectGrades = useMemo(() => {
     const gradesBySubject: { [key: string]: { matiere: string; notes: Grade[]; codeMatiere: string; prof: string } } = {};
@@ -131,7 +129,17 @@ export function GradesTable({ grades, coeficients }: GradesTableProps) {
       }
     });
 
-
+    const infos: { codeMatiere: string; matiere: string; average: string | number }[] = useMemo(() => {
+      return subjectGrades.map((subject) => {
+        const average = calcAverage(filteredGrades(subject.notes), 20);
+        return {
+          codeMatiere: subject.codeMatiere,
+          matiere: subject.matiere,
+          average,
+        };
+      });
+    }, [subjectGrades, selectedTrimester]);
+  
   const generalAverage = useMemo(
     () =>
       calcGeneralAverage(
@@ -233,6 +241,8 @@ export function GradesTable({ grades, coeficients }: GradesTableProps) {
                 {generalAverage}
               </span>
             </div>
+            <NotesInfos grades={infos}/>
+            <br></br>
           </div>
         ) : (
           <div className="p-6">
