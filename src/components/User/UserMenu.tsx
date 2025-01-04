@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { LogOut, User, FileText, Scale, Code, ChevronDown, Settings } from 'lucide-react';
-import { ThemeToggle } from './ThemeToggle';
+import { ThemeToggle } from '../ThemeToggle';
 import { LegalNotice } from './LegalNotice';
 import { DevNotes } from './DevNotes';
-import { Parameters } from './Settings';
-import type { User as UserType } from '../types/auth';
+import { Parameters } from '../Settings';
+import type { User as UserType } from '../../types/auth';
 import santaHat from '../img/c_hat.png';
 
 interface UserMenuProps {

@@ -1,7 +1,7 @@
 
 import React, { useState, useMemo, useEffect } from "react";
 import { Calculator, ChevronDown } from "lucide-react";
-import type { Grade } from "../types/auth";
+import type { Grade } from "../../types/auth";
 import { GradesChart } from "./GradesChart";
 import { NotesPopup } from "./NotePopup";
 import { NotesInfos } from './NotesInfos';

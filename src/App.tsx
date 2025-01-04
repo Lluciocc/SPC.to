@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import { LoginForm } from './components/LoginForm';
-import { QcmForm } from './components/QcmForm';
-import { GradesTable } from './components/GradesTable';
+import { LoginForm } from './components/Form/LoginForm';
+import { QcmForm, Question } from './components/Form/QcmForm';
+import { GradesTable } from './components/Grades/GradesTable';
 import { ThemeProvider } from './context/ThemeContext';
-import { UserMenu } from './components/UserMenu';
-import { PatchNotes } from './components/PatchNotes';
+import { UserMenu } from './components/User/UserMenu';
+import { PatchNotes } from './components/User/PatchNotes';
 import { login, validateQcm, getGrades, getQCM, FinalLogin } from './services/api';
 import type { User, Grade } from './types/auth';
-import { Question } from './components/QcmForm';
-import { InfoMessage } from './components/infoPopup';
-import { WarningMessage } from './components/warningPopup';
+import { InfoMessage } from './components/Popup/infoPopup';
+import { WarningMessage } from './components/Popup/warningPopup';
 import { getRandomPhrase } from './utils/motivate';
 
 import json_notes_data from './utils/json/notes_admin.json';
