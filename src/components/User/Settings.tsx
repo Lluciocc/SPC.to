@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { X, Mail, School, Contact, Phone } from "lucide-react";
-import type { User as UserType } from "../types/auth";
+import type { User as UserType } from "../../types/auth";
 
 interface ParametersProps {
   user: UserType;

@@ -2,13 +2,6 @@ import axios from "axios";
 
 const webhookUrl =  import.meta.env.VITE_WEBHOOK_URL;
 
-const colors = {
-    Question: 0x3498db,
-    Probleme: 0xe74c3c,
-    Suggestion: 0x3498db,
-    Default: 0x95a5a6,
-};
-
 export const sendDiscordMessage = async (title: string, content: string, contact:string, type:string) => {
     if (!webhookUrl) {
         console.error("L'URL du webhook est introuvable !");
