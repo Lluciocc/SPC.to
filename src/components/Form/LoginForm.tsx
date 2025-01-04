@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowRight, Lock, User, Eye, EyeOff } from 'lucide-react';
-import { ThemeToggle } from './ThemeToggle';
+import { ThemeToggle } from '../ThemeToggle';
 
 interface LoginFormProps {
   onLogin: (username: string, password: string) => Promise<void>;

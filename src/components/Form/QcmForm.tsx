@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CheckCircle2, AlertCircle } from 'lucide-react';
-import { decodeBase64 } from '../utils/base64';
+import { decodeBase64 } from '../../utils/base64';
 
 export interface Question {
   id: number;

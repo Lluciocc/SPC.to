@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { LogOut, User, FileText, Scale, Code, ChevronDown, Settings } from 'lucide-react';
+import { LogOut, User, FileText, Scale, Code, ChevronDown, Settings, MessageSquareShare } from 'lucide-react';
 import { ThemeToggle } from '../ThemeToggle';
 import { LegalNotice } from './LegalNotice';
 import { DevNotes } from './DevNotes';
-import { Parameters } from '../Settings';
+import { Parameters } from './Settings';
+import { Feedback } from './Feedback';
 import type { User as UserType } from '../../types/auth';
-import santaHat from '../img/c_hat.png';
 
 interface UserMenuProps {
   user: UserType;
@@ -18,6 +18,7 @@ export function UserMenu({ user, onLogout, onShowPatchNotes }: UserMenuProps) {
   const [showLegal, setShowLegal] = useState(false);
   const [showDevNotes, setShowDevNotes] = useState(false);
   const [showParameters, setShowParameters] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
   const [imageError, setImageError] = useState(false);
   const [showPhoto, setShowPhoto] = useState<boolean>(localStorage.getItem('showPhoto') !== 'no');
 
@@ -122,6 +123,16 @@ export function UserMenu({ user, onLogout, onShowPatchNotes }: UserMenuProps) {
           <span>Paramètres</span>
         </button>
 
+        <div className='px-4 py-2 flex items-center space-x-2 border-t border-gray-200 dark:border-gray-700'>
+            <button
+              onClick={() => setShowFeedback(true)}
+              className="w-full text-left px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center space-x-2 transition-colors"
+            >
+                <MessageSquareShare className="h-4 w-4" />
+                <span>Faire un retour</span>
+            </button>
+        </div>
+
         <div className="px-4 py-2 flex items-center space-x-2 border-t border-gray-200 dark:border-gray-700">
           <ThemeToggle />
           <span className="text-sm text-gray-700 dark:text-gray-300">Thème</span>
@@ -139,6 +150,7 @@ export function UserMenu({ user, onLogout, onShowPatchNotes }: UserMenuProps) {
       {showLegal && <LegalNotice onClose={() => setShowLegal(false)} />}
       {showDevNotes && <DevNotes onClose={() => setShowDevNotes(false)} />}
       {showParameters && <Parameters user={user} onClose={() => setShowParameters(false)} />}
+      {showFeedback && <Feedback onClose={() => setShowFeedback(false)} />}
     </div>
   );
 }

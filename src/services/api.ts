@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { LoginResponse, FLog } from '../types/auth';
-import { Question } from '../components/QcmForm';
+import { Question } from '../components/Form/QcmForm';
 
 const API_URL = 'https://api.ecoledirecte.com/v3';
 const API_VERSION = '4.62.1';
