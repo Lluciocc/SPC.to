@@ -205,8 +205,8 @@ export function GradesTable({ grades, coeficients }: GradesTableProps) {
               </thead>
               <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                 {subjectGrades.map((subject, index) => {
-                  const nbNotes = filteredGrades(subject.notes)
-                  const average = calcAverage(nbNotes, 30);
+                  const nbNotes = filteredGrades(subject.notes);
+                  const average = calcAverage(nbNotes, 20);
                     
                   const gradeColor = getGradeColor(average);
 
