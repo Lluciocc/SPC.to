@@ -6,8 +6,6 @@ export async function downloadFile(id: number, token: string, type: string, idDe
       idDevoir ? `&idDevoir=${idDevoir}` : ''
     }`;
 
-    console.log("URL de la requête:", url);
-
     const response = await fetch(url, {
       method: 'POST',
       headers: {

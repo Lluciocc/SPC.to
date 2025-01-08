@@ -242,7 +242,6 @@ export async function FinalLogin(
 
     const data = await handleApiResponse<FLog>(response);
 
-    console.clear();
     console.log(data);
 
     const account = data.data.accounts[0];

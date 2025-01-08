@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { X, Mail, School, Contact, Phone } from "lucide-react";
 import type { User as UserType } from "../../types/auth";
+import { LegalNotice } from "./LegalNotice";
 
 interface ParametersProps {
   user: UserType;
@@ -10,10 +11,10 @@ interface ParametersProps {
 export function Parameters({ user, onClose }: ParametersProps) {
   const [isOn, setIsOn] = useState(localStorage.getItem("showPhoto") !== "no");
   const [isClosing, setIsClosing] = useState(false);
+  const [showLegal, setShowLegal] = useState(false);
 
   const clearLocalStorage = async () => {
     localStorage.clear();
-    
   };
 
   useEffect(() => {
@@ -25,10 +26,10 @@ export function Parameters({ user, onClose }: ParametersProps) {
   };
 
   const handleClose = () => {
-    setIsClosing(true); 
+    setIsClosing(true);
     setTimeout(() => {
-      onClose(); 
-    }, 300); 
+      onClose();
+    }, 300);
   };
 
   return (
@@ -131,8 +132,20 @@ export function Parameters({ user, onClose }: ParametersProps) {
             <X className="h-4 w-4" />
             <span>Effacer localStorage</span>
           </button>
+
+          <div className="text-xs text-gray-900">
+            Voir les{" "}
+            <a
+              onClick={() => setShowLegal(true)}
+              className="cursor-pointer text-blue-400 hover:underline"
+            >
+              mentions légales
+          </a>
+          </div>
         </div>
       </div>
+
+      {showLegal && <LegalNotice onClose={() => setShowLegal(false)} />}
     </div>
   );
 }

@@ -1,12 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { LogOut, User, FileText, Scale, Code, ChevronDown, Settings, MessageSquareShare } from 'lucide-react';
+import { LogOut, User, FileText, Code, ChevronDown, Settings, MessageSquareShare, Mail } from 'lucide-react';
 import { ThemeToggle } from '../ThemeToggle';
-import { LegalNotice } from './LegalNotice';
 import { DevNotes } from './DevNotes';
 import { Parameters } from './Settings';
 import { PatchNotes } from './PatchNotes';
 import { Feedback } from './Feedback';
 import type { User as UserType } from '../../types/auth';
+import { MessageriePopup } from './messageriePopup';
+
 
 interface UserMenuProps {
   user: UserType;
@@ -15,12 +16,12 @@ interface UserMenuProps {
 
 export function UserMenu({ user, onLogout }: UserMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [showLegal, setShowLegal] = useState(false);
   const [showDevNotes, setShowDevNotes] = useState(false);
   const [showParameters, setShowParameters] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
   const [imageError, setImageError] = useState(false);
   const [showPatchNotes, setShowPatchNotes] = useState(false);
+  const [showMessagerie, setShowMessagerie] = useState(false);
   const [showPhoto, setShowPhoto] = useState<boolean>(localStorage.getItem('showPhoto') !== 'no');
 
   const menuRef = useRef<HTMLDivElement>(null);
@@ -100,6 +101,17 @@ export function UserMenu({ user, onLogout }: UserMenuProps) {
           <span>Notes de mise à jour</span>
         </button>
 
+
+        <button
+          //onClick={() => setShowMessagerie(true)}
+          onClick={() => alert("Coming soon..")}
+          className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2 transition-colors"
+        >
+          <Mail className="h-4 w-4" />
+          <span>Messagerie</span>
+        </button>
+
+
         <button
           onClick={() => setShowDevNotes(true)}
           className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2 transition-colors"
@@ -108,14 +120,6 @@ export function UserMenu({ user, onLogout }: UserMenuProps) {
           <span>Notes du développeur</span>
         </button>
 
-        <button
-          onClick={() => setShowLegal(true)}
-          className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2 transition-colors"
-        >
-          <Scale className="h-4 w-4" />
-          <span>Mentions légales</span>
-        </button>
-        
         <button
           onClick={() => setShowParameters(true)}
           className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2 transition-colors"
@@ -150,7 +154,7 @@ export function UserMenu({ user, onLogout }: UserMenuProps) {
 
 
       {showPatchNotes && <PatchNotes onClose={() => setShowPatchNotes(false)} />}
-      {showLegal && <LegalNotice onClose={() => setShowLegal(false)} />}
+      {showMessagerie && <MessageriePopup onClose={() => setShowMessagerie(false)} />}
       {showDevNotes && <DevNotes onClose={() => setShowDevNotes(false)} />}
       {showParameters && <Parameters user={user} onClose={() => setShowParameters(false)} />}
       {showFeedback && <Feedback onClose={() => setShowFeedback(false)} />}
