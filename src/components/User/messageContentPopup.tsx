@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { X } from "lucide-react";
+import { X, Download } from "lucide-react";
 import { GetMessageContent } from "../../utils/messagerie";
 import { decodeBase64 } from "../../utils/base64";
+import { downloadFile } from "../../utils/download";
 
 interface MessagerieContentProps {
   onClose: () => void;
@@ -128,9 +129,29 @@ export function MessageContent({ onClose, id, token, messageID }: MessagerieCont
                 dangerouslySetInnerHTML={{ __html: decodeBase64(message?.content) }} 
                 />
               </div>
-              <div className="mt-1 text-gray-500 dark:text-gray-400">
-                {message?.files.length !==0 ? "Fichier disponible mais non telechargeable pour le moment" : ""}
-              </div>
+              <div className="mt-6">
+                {message?.files && message.files.length > 0 ? (
+                    <div>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Fichiers attachés :</h3>
+                    <ul className="mt-4 space-y-2">
+                        {message.files.map((file) => (
+                        <li key={file.id} className="flex items-center justify-between">
+                            <span className="text-sm text-gray-700 dark:text-gray-300">{file.libelle}</span>
+                            <button
+                            onClick={() => downloadFile(file.id, token, 'PIECE_JOINTE', file.libelle)}
+                            className="text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 transition-colors text-sm"
+                            >
+                            <Download className="inline h-4 w-4 mr-1" /> Télécharger
+                            </button>
+                        </li>
+                        ))}
+                    </ul>
+                    </div>
+                ) : (
+                    <p className="text-sm text-gray-500 dark:text-gray-400"></p>
+                )}
+                </div>
+
               <div className="mt-1 text-sm text-gray-500 dark:text-gray-400">Envoyé le {message?.date}</div>
             </div>
           )}

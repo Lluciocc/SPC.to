@@ -1,10 +1,8 @@
 const API_URL = 'https://api.ecoledirecte.com/v3';
 
-export async function downloadFile(id: number, token: string, type: string, idDevoir?: number) {
+export async function downloadFile(id: number, token: string, type: string, libelle: string) {
   try {
-    const url = `${API_URL}/telechargement.awp?verbe=get&fichierId=${id}&leTypeDeFichier=${type}${
-      idDevoir ? `&idDevoir=${idDevoir}` : ''
-    }`;
+    const url = `${API_URL}/telechargement.awp?verbe=get&queueEnabled=1&fichierId=${id}&leTypeDeFichier=${type}&v=4.69.0`;
 
     const response = await fetch(url, {
       method: 'POST',
@@ -25,7 +23,7 @@ export async function downloadFile(id: number, token: string, type: string, idDe
     const fileURL = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = fileURL;
-    link.download = `SPC.to_fichier_${id}.${type}`; 
+    link.download = `${libelle}_SPC.to.pdf` || `SPC.to_fichier_${id}.${type}`; 
     document.body.appendChild(link);
     link.click();
 

@@ -61,7 +61,7 @@ export function BulletinBtn({ period }: { period: string }) {
     <button
       onClick={() => {
         if (id) {
-          downloadFile(id, token, "pdf");
+          downloadFile(id, token, "pdf", "bulletin");
         } else {
           console.error("ID introuvable pour la période donnée");
         }
