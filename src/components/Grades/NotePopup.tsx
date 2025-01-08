@@ -9,16 +9,23 @@ interface NotesPopup {
 const parseGrade = (value: string): number =>
     parseFloat(value.replace(",", "."));
 
-const getGradeColor = (average: string | number) => {
-    if (average === "N/A") return "text-gray-500 dark:text-gray-400";
-    const numericAverage =
-      typeof average === "string" ? parseFloat(average) : average;
-    if (numericAverage >= 16) return "text-green-600 dark:text-green-400";
-    if (numericAverage >= 14) return "text-emerald-600 dark:text-emerald-400";
-    if (numericAverage >= 12) return "text-blue-600 dark:text-blue-400";
-    if (numericAverage >= 10) return "text-yellow-600 dark:text-yellow-400";
-    return "text-red-600 dark:text-red-400";
-  };
+const getGradeColor = (average: string | number, noteSur: number = 20) => {
+  if (average === "N/A") return "text-gray-500 dark:text-gray-400";
+
+  let numericAverage =
+    typeof average === "string" ? parseFloat(average) : average;
+
+  if (noteSur !== 20 && !isNaN(numericAverage)) {
+    numericAverage = (numericAverage * 20) / noteSur;
+  }
+
+  if (numericAverage >= 16) return "text-green-600 dark:text-green-400";
+  if (numericAverage >= 14) return "text-emerald-600 dark:text-emerald-400";
+  if (numericAverage >= 12) return "text-blue-600 dark:text-blue-400";
+  if (numericAverage >= 10) return "text-yellow-600 dark:text-yellow-400";
+  return "text-red-600 dark:text-red-400";
+};
+
   
 
 export function NotesPopup({ onClose, selectedSubject, period }: NotesPopup) {
@@ -30,8 +37,6 @@ export function NotesPopup({ onClose, selectedSubject, period }: NotesPopup) {
       onClose(); 
     }, 300); 
   };
-
-  console.log(selectedSubject)
 
   return (
     <div
@@ -67,7 +72,7 @@ export function NotesPopup({ onClose, selectedSubject, period }: NotesPopup) {
           ) : (
 
             selectedSubject.notes.map((note, idx) => {
-              const noteColor = getGradeColor(parseGrade(note.valeur));
+              const noteColor = getGradeColor(parseGrade(note.valeur), note.noteSur);
               
               if (period !== note.codePeriode) {
                 return null;
@@ -78,7 +83,7 @@ export function NotesPopup({ onClose, selectedSubject, period }: NotesPopup) {
                   key={idx}
                   className="flex justify-between text-sm bg-gray-50 dark:bg-gray-700 p-2 rounded-lg"
                 >
-                  <span className={noteColor}>{note.valeur} {note.coef != 1? `(${note.coef})` : ""}</span>
+                  <span className={noteColor}>{note.valeur} {note.noteSur != 20? `/ ${note.noteSur}`: ""} {note.coef != 1? `(${note.coef})` : ""}</span>
                   <span>{note.type}</span>
                   <span className="text-black dark:text-white">{new Date(note.date).toLocaleDateString()}</span>
                 </li>

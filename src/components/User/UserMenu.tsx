@@ -4,22 +4,23 @@ import { ThemeToggle } from '../ThemeToggle';
 import { LegalNotice } from './LegalNotice';
 import { DevNotes } from './DevNotes';
 import { Parameters } from './Settings';
+import { PatchNotes } from './PatchNotes';
 import { Feedback } from './Feedback';
 import type { User as UserType } from '../../types/auth';
 
 interface UserMenuProps {
   user: UserType;
   onLogout: () => void;
-  onShowPatchNotes: () => void;
 }
 
-export function UserMenu({ user, onLogout, onShowPatchNotes }: UserMenuProps) {
+export function UserMenu({ user, onLogout }: UserMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [showLegal, setShowLegal] = useState(false);
   const [showDevNotes, setShowDevNotes] = useState(false);
   const [showParameters, setShowParameters] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const [showPatchNotes, setShowPatchNotes] = useState(false);
   const [showPhoto, setShowPhoto] = useState<boolean>(localStorage.getItem('showPhoto') !== 'no');
 
   const menuRef = useRef<HTMLDivElement>(null);
@@ -92,7 +93,7 @@ export function UserMenu({ user, onLogout, onShowPatchNotes }: UserMenuProps) {
         </div>
 
         <button
-          onClick={onShowPatchNotes}
+          onClick={() => setShowPatchNotes(true)}
           className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2 transition-colors"
         >
           <FileText className="h-4 w-4" />
@@ -147,6 +148,8 @@ export function UserMenu({ user, onLogout, onShowPatchNotes }: UserMenuProps) {
         </button>
       </div>
 
+
+      {showPatchNotes && <PatchNotes onClose={() => setShowPatchNotes(false)} />}
       {showLegal && <LegalNotice onClose={() => setShowLegal(false)} />}
       {showDevNotes && <DevNotes onClose={() => setShowDevNotes(false)} />}
       {showParameters && <Parameters user={user} onClose={() => setShowParameters(false)} />}

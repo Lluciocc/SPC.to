@@ -5,15 +5,11 @@ import type { Grade } from "../../types/auth";
 import { GradesChart } from "./GradesChart";
 import { NotesPopup } from "./NotePopup";
 import { NotesInfos } from './NotesInfos';
+import { BulletinBtn } from "../other/GetBulletinBtn";
 
 // Helper functions
 const parseGrade = (value: string): number =>
   parseFloat(value.replace(",", "."));
-
-const safeParseFloat = (value: any) => {
-  const parsedValue = parseFloat(value?.replace(",", "."));
-  return isNaN(parsedValue) ? "N/A" : parsedValue;
-};
 
 const calcAverage = (grades: Grade[], scale: number = 20) => {
   let totalWeighted = 0;
@@ -42,24 +38,43 @@ const calcAverage = (grades: Grade[], scale: number = 20) => {
 const calcGeneralAverage = (
   subjects: { matiere: string; codeMatiere: string; notes: Grade[] }[],
   coefficients: { [codeMatiere: string]: number },
-  scale: number = 20
+  scale: number = 20,
+  goodSousMatiere: {
+    [codeMatiere: string]: { matierePrincipale: string; sousMatieres: string[] };
+  }
 ) => {
   let totalWeighted = 0;
   let totalCoef = 0;
 
   subjects.forEach((subject) => {
-    const coef = coefficients[subject.codeMatiere] || 0; // Utiliser codeMatiere ici
+    const coef = coefficients[subject.codeMatiere] || 0;
     const average = calcAverage(subject.notes, scale);
 
+    // Traitement de la matière principale
     if (average !== "N/A") {
       totalWeighted += parseFloat(average) * coef;
       totalCoef += coef;
     }
 
+    // Traitement des sous-matières associées
+    const sousMatieres = goodSousMatiere[subject.codeMatiere]?.sousMatieres || [];
+    sousMatieres.forEach((sousMatiere) => {
+      const sousSubject = subjects.find((s) => s.matiere === sousMatiere);
+      if (sousSubject) {
+        const sousAverage = calcAverage(sousSubject.notes, scale);
+        const sousCoef = coefficients[sousSubject.codeMatiere] || 0;
+
+        if (sousAverage !== "N/A") {
+          totalWeighted += parseFloat(sousAverage) * sousCoef;
+          totalCoef += sousCoef;
+        }
+      }
+    });
   });
 
   return totalCoef === 0 ? "N/A" : (totalWeighted / totalCoef).toFixed(2);
 };
+
 
 const getGradeColor = (average: string | number) => {
   if (average === "N/A") return "text-gray-500 dark:text-gray-400";
@@ -72,14 +87,14 @@ const getGradeColor = (average: string | number) => {
   return "text-red-600 dark:text-red-400";
 };
 
-export function GradesTable({ grades, coeficients }: GradesTableProps) {
-  const [selectedTrimester, setSelectedTrimester] = useState<string>("A001");
+export function GradesTable({ grades, coeficients, goodSousMatiere }: GradesTableProps) {
+  const [selectedTrimester, setSelectedTrimester] = useState<string>("A002");
   const [showChart, setShowChart] = useState<boolean>(false);
   const [selectedSubject, setSelectedSubject] = useState<string>("");
   const [showNotePopup, setShowNotePopup] = useState(false);
 
   const subjectGrades = useMemo(() => {
-    const gradesBySubject: { [key: string]: { matiere: string; notes: Grade[]; codeMatiere: string; prof: string } } = {};
+    const gradesBySubject: { [key: string]: { matiere: string; notes: Grade[]; codeMatiere: string; prof: string; sousMatiere: boolean } } = {};
 
     grades.forEach((grade) => {
       const subjectKey = `${grade.libelleMatiere}${
@@ -92,6 +107,7 @@ export function GradesTable({ grades, coeficients }: GradesTableProps) {
           prof: grade.professeur || "Inconnu",
           codeMatiere: grade.codeMatiere,
           notes: [],
+          sousMatiere: grade.sousMatiere
         };
       }
 
@@ -147,8 +163,11 @@ export function GradesTable({ grades, coeficients }: GradesTableProps) {
           matiere: subject.matiere,
           codeMatiere: subject.codeMatiere,
           notes: filteredGrades(subject.notes),
+          sousMatiere: subject.sousMatiere
         })),
-        coeficients
+        coeficients,
+        20,
+        goodSousMatiere
       ),
     [subjectGrades, coeficients, selectedTrimester]
   );
@@ -163,6 +182,7 @@ export function GradesTable({ grades, coeficients }: GradesTableProps) {
             <h2 className="text-xl font-semibold">Moyennes par matière</h2>
           </div>
           <div className="flex items-center gap-4 mt-4 sm:mt-0">
+          <BulletinBtn period={selectedTrimester}></BulletinBtn>
             <select
               value={selectedTrimester}
               onChange={(e) => setSelectedTrimester(e.target.value)}

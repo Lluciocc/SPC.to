@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Grade } from '../types/auth';
+import { Grade } from '../../types/auth';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 

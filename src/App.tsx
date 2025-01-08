@@ -4,7 +4,6 @@ import { QcmForm, Question } from './components/Form/QcmForm';
 import { GradesTable } from './components/Grades/GradesTable';
 import { ThemeProvider } from './context/ThemeContext';
 import { UserMenu } from './components/User/UserMenu';
-import { PatchNotes } from './components/User/PatchNotes';
 import { login, validateQcm, getGrades, getQCM, FinalLogin } from './services/api';
 import type { User, Grade } from './types/auth';
 import { InfoMessage } from './components/Popup/infoPopup';
@@ -13,6 +12,7 @@ import { getRandomPhrase } from './utils/motivate';
 
 import json_notes_data from './utils/json/notes_admin.json';
 import { console_message } from './utils/console';
+import { GetDocs } from './utils/docAdm';
 
 interface AuthUser extends User {
   token: string;
@@ -28,10 +28,10 @@ function App() {
   const [tempToken, setTempToken] = useState<string>('');
   const [usernameStr, setUsernameStr] = useState<string>('');
   const [passStr, setPassStr] = useState<string>('');
-  const [showPatchNotes, setShowPatchNotes] = useState(false);
   const [warning, setWarning] = useState<string>('');
   const [coefficients, setCoefficients] = useState<{ [key: string]: number }>({});
   const [infos, setInfos] = useState<string>('');
+  const [goodSousMatiere, setSousMatiere] = useState<any>();
 
   window.onload = async function TryToLog() {
     console_message()
@@ -69,6 +69,8 @@ function App() {
         setUser(authUser);
         setShowQcm(false);
 
+        GetDocs(token);
+
         const gradesData = await getGrades(token, account.id);
         const periodeActuelle = gradesData.periodes.find(
           (periode) => periode.codePeriode === 'A001'
@@ -81,7 +83,25 @@ function App() {
             acc[discipline.codeMatiere] = discipline.coef; // Utiliser codeMatiere comme clé
             return acc;
           }, {});
+          ///////////////////////////////////////////////
+          const listedSousMatiere = disciplines.reduce((acc, discipline) => {
+            if (!discipline.sousMatiere) {
 
+              acc[discipline.codeMatiere] = {
+                matierePrincipale: discipline.discipline,
+                sousMatieres: [],
+              };
+            } else {
+
+              if (acc[discipline.codeMatiere]) {
+                acc[discipline.codeMatiere].sousMatieres.push(discipline.discipline);
+              }
+            }
+          
+            return acc;
+          }, {});
+          setSousMatiere(listedSousMatiere);
+          ////////////////////////////////////////////////
           setCoefficients(coefficients);
           setGrades(gradesData.notes);
         } else {
@@ -141,6 +161,25 @@ function App() {
             acc[discipline.codeMatiere] = discipline.coef;
             return acc;
           }, {});
+          ///////////////////////////////////////////////
+          const listedSousMatiere = disciplines.reduce((acc, discipline) => {
+            if (!discipline.sousMatiere) {
+
+              acc[discipline.codeMatiere] = {
+                matierePrincipale: discipline.discipline,
+                sousMatieres: [],
+              };
+            } else {
+
+              if (acc[discipline.codeMatiere]) {
+                acc[discipline.codeMatiere].sousMatieres.push(discipline.discipline);
+              }
+            }
+          
+            return acc;
+          }, {});
+          setSousMatiere(listedSousMatiere);
+          ////////////////////////////////////////////////
 
           setCoefficients(coefficients);
           setGrades(gradesData.notes);
@@ -188,6 +227,8 @@ function App() {
       setUser(authUser);
       setShowQcm(false);
 
+      GetDocs(token);
+
       const gradesData = await getGrades(token, account.id);
       const periodeActuelle = gradesData.periodes.find(
         (periode) => periode.codePeriode === 'A001'
@@ -200,6 +241,25 @@ function App() {
           acc[discipline.codeMatiere] = discipline.coef;
           return acc;
         }, {});
+        ///////////////////////////////////////////////
+        const listedSousMatiere = disciplines.reduce((acc, discipline) => {
+          if (!discipline.sousMatiere) {
+
+            acc[discipline.codeMatiere] = {
+              matierePrincipale: discipline.discipline,
+              sousMatieres: [],
+            };
+          } else {
+
+            if (acc[discipline.codeMatiere]) {
+              acc[discipline.codeMatiere].sousMatieres.push(discipline.discipline);
+            }
+          }
+        
+          return acc;
+        }, {});
+        setSousMatiere(listedSousMatiere);
+        ////////////////////////////////////////////////
 
         setCoefficients(coefficients);
         setGrades(gradesData.notes);
@@ -248,11 +308,10 @@ function App() {
                 <UserMenu
                   user={user}
                   onLogout={handleLogout}
-                  onShowPatchNotes={() => setShowPatchNotes(true)}
                 />
               </div>
 
-              <GradesTable grades={grades} coeficients={coefficients} />
+              <GradesTable grades={grades} coeficients={coefficients} goodSousMatiere={goodSousMatiere} />
             </div>
           ) : showQcm ? (
             <div className="fixed inset-0 bg-black/50 dark:bg-black/70 flex items-center justify-center p-4">
@@ -269,7 +328,6 @@ function App() {
             </div>
           )}
 
-          {showPatchNotes && <PatchNotes onClose={() => setShowPatchNotes(false)} />}
         </div>
       </div>
     </ThemeProvider>
