@@ -103,8 +103,8 @@ export function UserMenu({ user, onLogout }: UserMenuProps) {
 
 
         <button
-          //onClick={() => setShowMessagerie(true)}
-          onClick={() => alert("Coming soon..")}
+          onClick={() => setShowMessagerie(true)}
+          //onClick={() => alert("Coming soon..")}
           className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2 transition-colors"
         >
           <Mail className="h-4 w-4" />
@@ -154,7 +154,7 @@ export function UserMenu({ user, onLogout }: UserMenuProps) {
 
 
       {showPatchNotes && <PatchNotes onClose={() => setShowPatchNotes(false)} />}
-      {showMessagerie && <MessageriePopup onClose={() => setShowMessagerie(false)} />}
+      {showMessagerie && <MessageriePopup onClose={() => setShowMessagerie(false)} id={user.id} token={user.token} />}
       {showDevNotes && <DevNotes onClose={() => setShowDevNotes(false)} />}
       {showParameters && <Parameters user={user} onClose={() => setShowParameters(false)} />}
       {showFeedback && <Feedback onClose={() => setShowFeedback(false)} />}
