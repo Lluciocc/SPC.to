@@ -35,7 +35,7 @@ function App() {
 
   window.onload = async function TryToLog() {
     console_message()
-    setInfos("Le site est en cours de développement. Merci de votre indulgence !");
+    setInfos("Le site est en cours de maintenance du a Ecole Directe. Merci de votre indulgence !");
 
     try {
       if (
