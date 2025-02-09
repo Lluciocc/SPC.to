@@ -1,4 +1,4 @@
-> [!warning]
+> [!IMPORTANT]
 > Due to Ecole Directe policy, SPC.to end here. Thanks ❤️
 
 
