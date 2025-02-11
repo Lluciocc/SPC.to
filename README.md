@@ -1,6 +1,9 @@
 > [!IMPORTANT]
 > Due to Ecole Directe policy, SPC.to end here. Thanks ❤️
 
+> [!NOTE] 
+>> You can now access with admin login. It will load some local file. Try admin/admin in the connection page.
+
 
 <p align="center"><a href="https://spcto.netlify.app/" target="_blank"><img src="https://github.com/Lluciocc/spc.to/blob/main/img/1.PNG" width="800" alt="Ecole Directe Plus logo"></a></p>
 <p align="center">
